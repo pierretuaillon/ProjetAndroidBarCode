@@ -40,18 +40,18 @@ public class LecteurCodeBarres extends AppCompatActivity implements ZXingScanner
     @Override
     public void handleResult(com.google.zxing.Result rawResult) {
         // Do something with the result here
-        Log.v("AAAAAA", rawResult.getText()); // Prints scan results
+        Log.d("Scan content", rawResult.getText()); // Prints scan results
 
-        Log.v("BBBBBB", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
+        Log.d("Scan format", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 
         // If you would like to resume scanning, call this method below:
         // mScannerView.resumeCameraPreview(this);
 
-        Intent intent = new Intent(LecteurCodeBarres.this, MainActivity.class);
+        Intent intent = new Intent();
 
         intent.putExtra("scan_content",rawResult.getText());
         intent.putExtra("scan_format",rawResult.getBarcodeFormat().toString());
-        startActivityForResult(intent, 22);
+        setResult( 22,intent);
         finish();
     }
 }
