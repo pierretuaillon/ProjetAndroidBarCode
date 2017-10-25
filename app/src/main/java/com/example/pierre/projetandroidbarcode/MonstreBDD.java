@@ -37,6 +37,9 @@ public class MonstreBDD {
     private static final String COL_DEBLOQUE = "debloque";
     private static final int NUM_COL_DEBLOQUE = 5;
 
+    private static final String COL_SELECTIONNE = "selectionne";
+    private static final int NUM_COL_SELECTIONNE = 6;
+
     private SQLiteDatabase bdd;
 
     private GenerationBaseDeDonnees maBaseSQLite;
@@ -69,7 +72,7 @@ public class MonstreBDD {
         values.put(COL_NOM, monstre.getNom());
         values.put(COL_APPARENCE, monstre.getApparence());
         values.put(COL_DEBLOQUE, monstre.isDebloque());
-
+        values.put(COL_SELECTIONNE, monstre.isSelectionne());
         //on insère l'objet dans la BDD via le ContentValues
         return bdd.insert(TABLE_MONSTRE, null, values);
     }
@@ -83,6 +86,7 @@ public class MonstreBDD {
         values.put(COL_NOM, monstre.getNom());
         values.put(COL_APPARENCE, monstre.getApparence());
         values.put(COL_DEBLOQUE, monstre.isDebloque());
+        values.put(COL_SELECTIONNE, monstre.isSelectionne());
         return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
     }
 
@@ -98,7 +102,7 @@ public class MonstreBDD {
     }
 
     public Monstre getMonstreWithID(int id){
-        Cursor c = bdd.query(TABLE_MONSTRE, new String[] {COL_ID, COL_PDV, COL_PDA, COL_NOM, COL_APPARENCE, COL_DEBLOQUE}, COL_ID + " = " + id, null, null, null, null, null);
+        Cursor c = bdd.query(TABLE_MONSTRE, new String[] {COL_ID, COL_PDV, COL_PDA, COL_NOM, COL_APPARENCE, COL_DEBLOQUE, COL_SELECTIONNE}, COL_ID + " = " + id, null, null, null, null, null);
         return cursorToMonstre(c);
     }
 
@@ -126,6 +130,11 @@ public class MonstreBDD {
         monstre.setPDA(c.getInt(NUM_COL_PDA));
         monstre.setNom(c.getString(NUM_COL_NOM));
         monstre.setApparence(c.getString(NUM_COL_APPARENCE));
+        if (c.getInt(NUM_COL_SELECTIONNE) == 0){
+            monstre.setSelectionne(false);
+        }else{
+            monstre.setSelectionne(true);
+        }
         if (c.getInt(NUM_COL_DEBLOQUE) == 0){
             monstre.setDebloque(false);
         }else{

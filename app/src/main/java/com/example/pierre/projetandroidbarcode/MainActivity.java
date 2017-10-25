@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -51,7 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (intent.getStringExtra("scan_content") != null){
             Log.v("Scan content Main", intent.getStringExtra("scan_content"));
             txtContent.setText(intent.getStringExtra("scan_content"));
+<<<<<<< HEAD
+            algoTraitement(intent.getStringExtra("scan_content"));
+=======
 
+>>>>>>> 934c0e612888cc778a084d49b0a1d9dafaad819d
         }
 
     }
@@ -70,10 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
         SQLiteDatabase db=monstreBDD.getBDD();
-        Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"
-                + "monstre.db" + "'", null);
 
-        if (cursor.getCount()==0){
+
+        Cursor cursor = db.rawQuery("select * from table_monstre", null);
+        if(cursor.getCount()>0){
+            Log.v("Resultat insertion base", "Base déjà remplie");
+        }else{
             //Création des monstres
             Monstre monstre0 = new Monstre(1, 50, 10, "Shasos", "../res/drawable/dragon_3_tetes.gif");
             Monstre monstre1 = new Monstre(2, 50, 10, "Brassso", "../res/drawable/dragon_armure.gif");
@@ -98,9 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             monstreBDD.insertMonstre(monstre8);
             monstreBDD.insertMonstre(monstre9);
             Log.v("Resultat insertion base", "Base remplie");
-        }else{
-            Log.v("Resultat insertion base", "Base déjà remplie");
         }
+
 
 
         //On close la BDD
@@ -125,6 +135,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         monstreBDD.close();
 
+    }
+
+    public int[] algoTraitement(String content){
+        int [] tabInt = new int[2];
+
+        int value = content.hashCode();
+        String valueHash = Integer.toString(value);
+        Log.v("HASHVALUE : ", valueHash);
+        
+        return tabInt;
     }
 
 }
