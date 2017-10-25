@@ -72,29 +72,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Cursor cursor = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '"
                 + "monstre.db" + "'", null);
 
-        //Création des monstres
-        Monstre monstre0 = new Monstre(1, 50, 10, "Shasos", "../res/drawable/dragon_3_tetes.gif");
-        Monstre monstre1 = new Monstre(2, 50, 10, "Brassso", "../res/drawable/dragon_armure.gif");
-        Monstre monstre2 = new Monstre(3, 50, 10, "Thrakhorn", "../res/drawable/dragon_colere.gif");
-        Monstre monstre3 = new Monstre(4, 50, 10, "Stynfu", "../res/drawable/dragon_glace.gif");
-        Monstre monstre4 = new Monstre(5, 50, 10, "Darzur", "../res/drawable/dragon_or.gif");
-        Monstre monstre5 = new Monstre(6, 50, 10, "Wingdra", "../res/drawable/dragon_squellette.gif");
-        Monstre monstre6 = new Monstre(7, 50, 10, "Feha", "../res/drawable/dragon_tortue.gif");
-        Monstre monstre7 = new Monstre(8, 50, 10, "Claw", "../res/drawable/dragon_turquoise.gif");
-        Monstre monstre8 = new Monstre(9, 50, 10, "Roca", "../res/drawable/dragon_vert.gif");
-        Monstre monstre9 = new Monstre(10, 50, 10, "Lexcirhet", "../res/drawable/dragon_volant.gif");
+        if (cursor.getCount()==0){
+            //Création des monstres
+            Monstre monstre0 = new Monstre(1, 50, 10, "Shasos", "../res/drawable/dragon_3_tetes.gif");
+            Monstre monstre1 = new Monstre(2, 50, 10, "Brassso", "../res/drawable/dragon_armure.gif");
+            Monstre monstre2 = new Monstre(3, 50, 10, "Thrakhorn", "../res/drawable/dragon_colere.gif");
+            Monstre monstre3 = new Monstre(4, 50, 10, "Stynfu", "../res/drawable/dragon_glace.gif");
+            Monstre monstre4 = new Monstre(5, 50, 10, "Darzur", "../res/drawable/dragon_or.gif");
+            Monstre monstre5 = new Monstre(6, 50, 10, "Wingdra", "../res/drawable/dragon_squellette.gif");
+            Monstre monstre6 = new Monstre(7, 50, 10, "Feha", "../res/drawable/dragon_tortue.gif");
+            Monstre monstre7 = new Monstre(8, 50, 10, "Claw", "../res/drawable/dragon_turquoise.gif");
+            Monstre monstre8 = new Monstre(9, 50, 10, "Roca", "../res/drawable/dragon_vert.gif");
+            Monstre monstre9 = new Monstre(10, 50, 10, "Lexcirhet", "../res/drawable/dragon_volant.gif");
 
-        //On insère le livre que l'on vient de créer
-        monstreBDD.insertMonstre(monstre0);
-        monstreBDD.insertMonstre(monstre1);
-        monstreBDD.insertMonstre(monstre2);
-        monstreBDD.insertMonstre(monstre3);
-        monstreBDD.insertMonstre(monstre4);
-        monstreBDD.insertMonstre(monstre5);
-        monstreBDD.insertMonstre(monstre6);
-        monstreBDD.insertMonstre(monstre7);
-        monstreBDD.insertMonstre(monstre8);
-        monstreBDD.insertMonstre(monstre9);
+            //On insère le livre que l'on vient de créer
+            monstreBDD.insertMonstre(monstre0);
+            monstreBDD.insertMonstre(monstre1);
+            monstreBDD.insertMonstre(monstre2);
+            monstreBDD.insertMonstre(monstre3);
+            monstreBDD.insertMonstre(monstre4);
+            monstreBDD.insertMonstre(monstre5);
+            monstreBDD.insertMonstre(monstre6);
+            monstreBDD.insertMonstre(monstre7);
+            monstreBDD.insertMonstre(monstre8);
+            monstreBDD.insertMonstre(monstre9);
+            Log.v("Resultat insertion base", "Base remplie");
+        }else{
+            Log.v("Resultat insertion base", "Base déjà remplie");
+        }
+
 
         //On close la BDD
         monstreBDD.close();

@@ -13,6 +13,7 @@ public class Monstre {
     private int PDA;
     private String nom;
     private String apparence;
+    private boolean debloque=false;
 
 
     public Monstre(){}
@@ -63,5 +64,13 @@ public class Monstre {
 
     public void setApparence(String apparence) {
         this.apparence = apparence;
+    }
+
+    public boolean isDebloque() {
+        return debloque;
+    }
+
+    public void setDebloque(boolean debloque) {
+        this.debloque = debloque;
     }
 }
