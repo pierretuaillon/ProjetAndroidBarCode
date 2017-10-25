@@ -3,6 +3,7 @@ package com.example.pierre.projetandroidbarcode;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -31,12 +32,6 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         armesBtn.setOnClickListener(this);
         armuresBtn = (Button) findViewById(R.id.armuresBtn);
         armuresBtn.setOnClickListener(this);
-        button = (Button) findViewById(R.id.potionsBtn);
-        button.setOnClickListener(this);
-
-
-
-
     }
 
     @Override
@@ -45,20 +40,33 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.armesBtn:
                 intent = new Intent(MonstreActivity.this, ArmesActivity.class);
-                startActivityForResult(intent,22);
+                startActivityForResult(intent,25);
                 break;
             case R.id.armuresBtn:
                 intent = new Intent(MonstreActivity.this, ArmuresActivity.class);
-                startActivityForResult(intent,22);
-                break;
-            case R.id.potionsBtn:
-                intent = new Intent(MonstreActivity.this, PotionsActivity.class);
-                startActivityForResult(intent,22);
+                startActivityForResult(intent,26);
                 break;
             case R.id.imageView:
                 intent = new Intent(MonstreActivity.this, MonstresActivity.class);
-                startActivityForResult(intent,22);
+                startActivityForResult(intent,27);
+                break;
+            default:
+
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        switch(requestCode){
+            case 25:
+
+                break;
+            case 26:
+
+                break;
+            case 27:
+
                 break;
         }
+
     }
 }
