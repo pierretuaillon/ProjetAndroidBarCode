@@ -14,6 +14,9 @@ public class Monstre {
     private String nom;
     private String apparence;
     private boolean debloque=false;
+    private boolean selectionne=false;
+
+    //Ajouter Id arme et armure
 
 
     public Monstre(){}
@@ -72,5 +75,13 @@ public class Monstre {
 
     public void setDebloque(boolean debloque) {
         this.debloque = debloque;
+    }
+
+    public boolean isSelectionne() {
+        return selectionne;
+    }
+
+    public void setSelectionne(boolean selectionne) {
+        this.selectionne = selectionne;
     }
 }

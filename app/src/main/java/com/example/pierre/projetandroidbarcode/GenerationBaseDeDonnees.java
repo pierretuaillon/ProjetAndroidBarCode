@@ -16,13 +16,19 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
     private static final String COL_PDA = "PDA";
     private static final String COL_NOM = "nom";
     private static final String COL_APPARENCE = "apparence";
+    private static final String COL_DEBLOQUE = "debloque";
+    private static final String COL_SELECTIONNE = "selectionne";
+
+
 
     private static final String CREATE_BDD = "CREATE TABLE " + TABLE_MONSTRE + " ("
             + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_PDV + " INTEGER NOT NULL, "
             + COL_PDA + " INTEGER NOT NULL, "
             + COL_NOM + " TEXT NOT NULL, "
-            + COL_APPARENCE + " TEXT NOT NULL "
+            + COL_APPARENCE + " TEXT NOT NULL, "
+            + COL_DEBLOQUE + " BOOLEAN NOT NULL, "
+            + COL_SELECTIONNE + " BOOLEAN NOT NULL "
             + ");";
 
     public GenerationBaseDeDonnees(Context context, String name, CursorFactory factory, int version) {
