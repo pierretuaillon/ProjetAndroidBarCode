@@ -6,7 +6,7 @@
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nomMonstre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nom du monstre"
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="427dp"
         app:srcCompat="@drawable/dragon_squellette"
-        android:layout_below="@id/textView"
+        android:layout_below="@id/nomMonstre"
         />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,7 +32,7 @@
         android:weightSum="3">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/armesBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Armes"
@@ -40,7 +40,7 @@
             />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/armuresBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Armures"
@@ -48,10 +48,10 @@
             />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/potionsBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="A definir"
+            android:text="Potions"
             android:layout_weight="1"
             />
 

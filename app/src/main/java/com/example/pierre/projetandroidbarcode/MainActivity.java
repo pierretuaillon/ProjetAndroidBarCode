@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (intent.getStringExtra("scan_content") != null){
             Log.v("Scan content Main", intent.getStringExtra("scan_content"));
             txtContent.setText(intent.getStringExtra("scan_content"));
+
         }
 
     }
