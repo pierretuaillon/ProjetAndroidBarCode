@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LecteurCodeBarres"></activity>
+        <activity android:name=".ArmesActivity"></activity>
+        <activity android:name=".ArmuresActivity"></activity>
+        <activity android:name=".MonstresActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
