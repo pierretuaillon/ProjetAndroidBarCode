@@ -56,11 +56,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (intent.getStringExtra("scan_content") != null){
             Log.v("Scan content Main", intent.getStringExtra("scan_content"));
             txtContent.setText(intent.getStringExtra("scan_content"));
-<<<<<<< HEAD
-            algoTraitement(intent.getStringExtra("scan_content"));
-=======
+            int [] tabInt = new int[4];
+            tabInt = algoTraitement(intent.getStringExtra("scan_content"));
 
->>>>>>> 934c0e612888cc778a084d49b0a1d9dafaad819d
+            //Shasos
+            if (tabInt[0]>=0 && tabInt[0]<10 ){
+
+            //Brassso
+            }else if(tabInt[0]>=10 && tabInt[0]<20){
+
+            //Thrakhorn
+            }else if(tabInt[0]>=20 && tabInt[0]<30){
+
+            //Stynfu
+            }else if (tabInt[0]>=30 && tabInt[0]<40){
+
+            //Darzur
+            }else if (tabInt[0]>=40 && tabInt[0]<50){
+
+            //Wingdra
+            }else if (tabInt[0]>=50 && tabInt[0]<60){
+
+            //Feha
+            }else if (tabInt[0]>=60 && tabInt[0]<70){
+
+            //Claw
+            }else if (tabInt[0]>=70 && tabInt[0]<80){
+
+            //Roca
+            }else if (tabInt[0]>=80 && tabInt[0]<90){
+
+            //Lexcirhet
+            }else if (tabInt[0]>=90 && tabInt[0]<100){
+
+            }
+
+
+
+
         }
 
     }
@@ -138,12 +171,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public int[] algoTraitement(String content){
-        int [] tabInt = new int[2];
+        int [] tabInt = new int[4];
 
         int value = content.hashCode();
-        String valueHash = Integer.toString(value);
+
+        String valueHash = Integer.toString(Math.abs(value));
         Log.v("HASHVALUE : ", valueHash);
-        
+        //il faut 8 valeurs;
+
+        while(valueHash.length()<9){
+            valueHash += "1";
+        }
+
+        tabInt[0] = Integer.parseInt(valueHash.substring(0, 2));
+        tabInt[1] = Integer.parseInt(valueHash.substring(2, 4));
+        tabInt[2] = Integer.parseInt(valueHash.substring(4, 6));
+        tabInt[3] = Integer.parseInt(valueHash.substring(6, 8));
+        Log.v("HASHVALUE1 : ", Integer.toString(tabInt[0]));
+        Log.v("HASHVALUE2 : ", Integer.toString(tabInt[1]));
+        Log.v("HASHVALUE3 : ", Integer.toString(tabInt[2]));
+        Log.v("HASHVALUE4 : ", Integer.toString(tabInt[3]));
+
         return tabInt;
     }
 

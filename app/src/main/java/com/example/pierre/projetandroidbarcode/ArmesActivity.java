@@ -24,7 +24,7 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         super.onCreate(state);
         setContentView(R.layout.showarmes);
         MonstreBDD monstreBDD = new MonstreBDD(this);
-        armes = monstreBDD.getAllArmes();
+        //armes = monstreBDD.getAllArmes();
         lv = (ListView) findViewById(R.id.list);
         lv.setAdapter(this);
     }
