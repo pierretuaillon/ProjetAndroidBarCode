@@ -9,12 +9,16 @@ public class Arme {
     private boolean debloque;
     private int attaque;
     private String nom;
+    private String lienImage;
 
-    public Arme(int id, String nom, int atq) {
+    public Arme(){}
+
+    public Arme(int id, String nom, int atq, String lien) {
         this.id=id;
         this.nom=nom;
         this.attaque=atq;
         this.debloque=false;
+        this.lienImage = lien;
     }
 
     public int getId() {
@@ -47,5 +51,13 @@ public class Arme {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getLienImage() {
+        return lienImage;
+    }
+
+    public void setLienImage(String lienImage) {
+        this.lienImage = lienImage;
     }
 }

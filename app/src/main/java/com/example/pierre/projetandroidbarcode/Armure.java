@@ -10,6 +10,8 @@ public class Armure {
     private String nom;
     private int defense;
 
+    public Armure (){}
+
     public Armure (int id, String nom, int defense){
         this.id=id;
         this.debloque=false;

@@ -137,49 +137,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Shasos
                 if (tabInt[1]>=0 && tabInt[1]<10 ){
                     intentRedirectionScan.putExtra("MonstreID", 1);
-
                     //Brassso
                 }else if(tabInt[1]>=10 && tabInt[1]<20){
                     intentRedirectionScan.putExtra("MonstreID", 2);
-
                     //Thrakhorn
                 }else if(tabInt[1]>=20 && tabInt[1]<30){
                     intentRedirectionScan.putExtra("MonstreID", 3);
-
-
                     //Stynfu
                 }else if (tabInt[1]>=30 && tabInt[1]<40){
                     intentRedirectionScan.putExtra("MonstreID", 4);
-
                     //Darzur
                 }else if (tabInt[1]>=40 && tabInt[1]<50){
                     intentRedirectionScan.putExtra("MonstreID", 5);
-
                     //Wingdra
                 }else if (tabInt[1]>=50 && tabInt[1]<60){
                     intentRedirectionScan.putExtra("MonstreID", 6);
-
                     //Feha
                 }else if (tabInt[1]>=60 && tabInt[1]<70){
                     intentRedirectionScan.putExtra("MonstreID", 7);
-
                     //Claw
                 }else if (tabInt[1]>=70 && tabInt[1]<80){
                     intentRedirectionScan.putExtra("MonstreID", 8);
-
                     //Roca
                 }else if (tabInt[1]>=80 && tabInt[1]<90){
                     intentRedirectionScan.putExtra("MonstreID", 9);
-
                     //Lexcirhet
                 }else if (tabInt[1]>=90 && tabInt[1]<100){
                     intentRedirectionScan.putExtra("MonstreID", 10);
-
                 }
                 startActivityForResult(intentRedirectionScan,23);
 
                 //Debloque une arme
             }else if (tabInt[0]>=20 && tabInt[0]<60){
+                Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                //Shasos
+                if (tabInt[1]>=0 && tabInt[1]<10 ){
+                    intentRedirectionScan.putExtra("MonstreID", 1);
+                    //Brassso
+                }else if(tabInt[1]>=10 && tabInt[1]<20){
+                    intentRedirectionScan.putExtra("MonstreID", 2);
+                    //Thrakhorn
+                }else if(tabInt[1]>=20 && tabInt[1]<30){
+                    intentRedirectionScan.putExtra("MonstreID", 3);
+                    //Stynfu
+                }else if (tabInt[1]>=30 && tabInt[1]<40){
+                    intentRedirectionScan.putExtra("MonstreID", 4);
+                    //Darzur
+                }else if (tabInt[1]>=40 && tabInt[1]<50){
+                    intentRedirectionScan.putExtra("MonstreID", 5);
+                    //Wingdra
+                }else if (tabInt[1]>=50 && tabInt[1]<60){
+                    intentRedirectionScan.putExtra("MonstreID", 6);
+                    //Feha
+                }else if (tabInt[1]>=60 && tabInt[1]<70){
+                    intentRedirectionScan.putExtra("MonstreID", 7);
+                    //Claw
+                }else if (tabInt[1]>=70 && tabInt[1]<80){
+                    intentRedirectionScan.putExtra("MonstreID", 8);
+                    //Roca
+                }else if (tabInt[1]>=80 && tabInt[1]<90){
+                    intentRedirectionScan.putExtra("MonstreID", 9);
+                    //Lexcirhet
+                }else if (tabInt[1]>=90 && tabInt[1]<100){
+                    intentRedirectionScan.putExtra("MonstreID", 10);
+                }
+                startActivityForResult(intentRedirectionScan,15);
+
 
                 //Debloque une armure
             }else{
@@ -223,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Monstre monstre8 = new Monstre(9, 50, 10, "Roca", "dragon_vert");
             Monstre monstre9 = new Monstre(10, 50, 10, "Lexcirhet", "dragon_volant");
 
-            //On insère le livre que l'on vient de créer
+            //On insère les monstres que l'on vient de créer
             monstreBDD.insertMonstre(monstre0);
             monstreBDD.insertMonstre(monstre1);
             monstreBDD.insertMonstre(monstre2);
@@ -237,8 +260,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.v("Resultat insertion base", "Base remplie");
         }
 
+        cursor = db.rawQuery("select * from table_arme", null);
+        if(cursor.getCount()>0){
+            Log.v("Insertion base arme", "Base déjà remplie");
+        }else{
+            Arme arme0 = new Arme(1, "Le taser", 10, "arme_electric");
+            Arme arme1 = new Arme(2, "Le briquet", 10, "arme_fire");
+            Arme arme2 = new Arme(3, "Le fister", 10, "arme_fighting");
+            Arme arme3 = new Arme(4, "La plume d'oreiller", 10, "");
+            Arme arme4 = new Arme(5, "La beuh", 10, "arme_grass");
+            Arme arme5 = new Arme(6, "Le glaçon Frigide", 10, "arme_ice");
+            Arme arme6 = new Arme(7, "Le classic", 10, "arme_normal");
+            Arme arme7 = new Arme(8, "le caillou", 10, "arme_rock");
+            Arme arme8 = new Arme(9, "Le bout de metal", 10, "arme_steel");
+            Arme arme9 = new Arme(10, "La fontaine", 10, "arme_water");
 
+            //On insere les armes que l'on vient de creer
+            monstreBDD.insertArme(arme0);
+            monstreBDD.insertArme(arme1);
+            monstreBDD.insertArme(arme2);
+            monstreBDD.insertArme(arme3);
+            monstreBDD.insertArme(arme4);
+            monstreBDD.insertArme(arme5);
+            monstreBDD.insertArme(arme6);
+            monstreBDD.insertArme(arme7);
+            monstreBDD.insertArme(arme8);
+            monstreBDD.insertArme(arme9);
 
+            Log.v("Insertion base arme", "Base remplie");
+        }
         //On close la BDD
         monstreBDD.close();
     }
