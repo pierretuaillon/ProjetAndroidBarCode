@@ -1,5 +1,6 @@
 package com.example.pierre.projetandroidbarcode;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.net.URI;
+
 /**
  * Created by natha on 25/10/2017.
  */
@@ -19,7 +22,7 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
     private Button armesBtn;
     private Button armuresBtn;
     private Button button;
-    private ImageView imageView;
+    private ImageView  imageView;
 
     @Override
     public void onCreate(Bundle state) {
@@ -27,11 +30,37 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.showmonstre);
         nomMonstreView = (TextView) findViewById(R.id.nomMonstre);
         imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setOnClickListener(this);
+        //imageView.setOnClickListener(this);
         armesBtn = (Button) findViewById(R.id.armesBtn);
         armesBtn.setOnClickListener(this);
         armuresBtn = (Button) findViewById(R.id.armuresBtn);
         armuresBtn.setOnClickListener(this);
+
+        Intent source = getIntent();
+        Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
+        mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
+
+    }
+
+    public void mettreAJourMonstre(int idMonstre){
+        //Création d'une instance de ma classe LivresBDD
+        Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(idMonstre));
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+
+        //On ouvre la base de données pour écrire dedans
+        monstreBDD.open();
+        Monstre monstreAfficcher = monstreBDD.getMonstreWithID(idMonstre);
+        imageView.setImageResource(
+                this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
+        nomMonstreView.setText(monstreAfficcher.getNom());
+
+
+        //MonstreActivity.getAppContext().getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable",
+        //      MainActivity.getAppContext().getPackageName()));
+
+
+
+        monstreBDD.close();
     }
 
     @Override
@@ -55,8 +84,12 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         switch(requestCode){
+            case 23 :
+
+                break;
             case 25:
 
                 break;

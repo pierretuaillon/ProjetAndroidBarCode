@@ -3,9 +3,7 @@ package com.example.pierre.projetandroidbarcode;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 /**

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MonstreBDD {
 
     private static final int VERSION_BDD = 1;
-    private static final String NOM_BDD = "monstre.db";
+    private static final String NOM_BDD = "Applidragon.db";
 
     private static final String TABLE_MONSTRE = "table_monstre";
     private static final String COL_ID = "id";
@@ -39,6 +39,36 @@ public class MonstreBDD {
 
     private static final String COL_SELECTIONNE = "selectionne";
     private static final int NUM_COL_SELECTIONNE = 6;
+
+
+    //ARMES
+    private static final String COL_ID_ARME = "id";
+    private static final int NUM_COL_ARME_ID = 0;
+
+    private static final String COL_DEBLOQUE_ARME = "debloque";
+    private static final int NUM_COL_DEBLOQUE_ARME = 1;
+
+    private static final String COL_NOM_ARME = "nom";
+    private static final int NUM_COL_NOM_ARME = 2;
+
+    private static final String COL_ATTAQUE_ARME = "attaque";
+    private static final int NUM_COL_ATTAQUE_ARM = 3;
+
+
+    //ARMURES
+    private static final String TABLE_ARMURE = "table_armure";
+    private static final int NUM_COL_ARME_ID = 0;
+
+    private static final String COL_ID_ARMURE = "id";
+
+
+    private static final String COL_DEBLOQUE_ARMURE = "debloque";
+
+
+    private static final String COL_NOM_ARMURE = "nom";
+
+
+    private static final String COL_DEFENSE_ARMURE = "defense";
 
     private SQLiteDatabase bdd;
 
@@ -87,6 +117,30 @@ public class MonstreBDD {
         values.put(COL_APPARENCE, monstre.getApparence());
         values.put(COL_DEBLOQUE, monstre.isDebloque());
         values.put(COL_SELECTIONNE, monstre.isSelectionne());
+        return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
+    }
+
+    public int updatePDV(Monstre monstre, int PDV){
+        int id = monstre.getId();
+        ContentValues values = new ContentValues();
+        if (monstre.getPDV()<PDV){
+            values.put(COL_PDV, PDV);
+            Log.v("MAJ PDV : ", "true");
+        }else{
+            Log.v("MAJ PDV : ", "false");
+        }
+        return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
+    }
+
+    public int updatePDA(Monstre monstre, int PDA){
+        int id = monstre.getId();
+        ContentValues values = new ContentValues();
+        if (monstre.getPDA()<PDA){
+            values.put(COL_PDA, PDA);
+            Log.v("MAJ PDA : ", "true");
+        }else{
+            Log.v("MAJ PDA : ", "false");
+        }
         return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
     }
 

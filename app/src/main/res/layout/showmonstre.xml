@@ -19,17 +19,80 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="427dp"
+        android:layout_height="300dp"
         app:srcCompat="@drawable/dragon_squellette"
         android:layout_below="@id/nomMonstre"
         />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:weightSum="8">
 
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/pdv"
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="10 PDV"
+            />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/pda"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="10 PDA"
+            />
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/armure"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="+ 10 PDA"
+            />
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/arme"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="+ 10 PDV"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_gravity="bottom"
+        >
 
         <Button
             android:id="@+id/armesBtn"
