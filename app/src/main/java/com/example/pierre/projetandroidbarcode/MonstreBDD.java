@@ -193,9 +193,25 @@ public class MonstreBDD {
         return cursorToArme(c);
     }
 
+    public ArrayList<Arme> getAllArme(){
+        ArrayList<Arme>  listeArme = new ArrayList<>();
+        for (int i=1; i<11; i++){
+            listeArme.add(getArmeWithID(i));
+        }
+        return listeArme;
+    }
+
     public Armure getArmureWithID(int id){
         Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
         return cursorToArmure(c);
+    }
+
+    public ArrayList<Armure> getAllArmure(){
+        ArrayList<Armure> listeArmure = new ArrayList<>();
+        for (int i=1; i<11; i++){
+            listeArmure.add(getArmureWithID(i));
+        }
+        return listeArmure;
     }
 
     public ArrayList<Monstre> getAllMonstres(){
