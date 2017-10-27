@@ -37,7 +37,7 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.armesBtn)
+        if(v.getId()==R.id.btn)
             finish();
     }
 

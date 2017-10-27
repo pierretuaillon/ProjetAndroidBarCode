@@ -36,7 +36,7 @@ public class ArmuresActivity extends AppCompatActivity implements ListAdapter, V
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.armesBtn)
+        if(v.getId()==R.id.btn)
             finish();
     }
 

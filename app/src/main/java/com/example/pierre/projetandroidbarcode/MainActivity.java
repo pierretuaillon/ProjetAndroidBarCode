@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Arme arme0 = new Arme(1, "Le taser", 10, "arme_electric");
             Arme arme1 = new Arme(2, "Le briquet", 10, "arme_fire");
             Arme arme2 = new Arme(3, "Le fister", 10, "arme_fighting");
-            Arme arme3 = new Arme(4, "La plume d'oreiller", 10, "");
+            Arme arme3 = new Arme(4, "La plume d'oreiller", 10, "arme_flying");
             Arme arme4 = new Arme(5, "La beuh", 10, "arme_grass");
             Arme arme5 = new Arme(6, "Le glaçon Frigide", 10, "arme_ice");
             Arme arme6 = new Arme(7, "Le classic", 10, "arme_normal");

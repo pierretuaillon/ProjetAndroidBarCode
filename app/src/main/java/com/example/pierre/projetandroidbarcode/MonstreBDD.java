@@ -254,6 +254,7 @@ public class MonstreBDD {
         armure.setNom(c.getString(NUM_COL_NOM_ARMURE));
         armure.setId(c.getInt(NUM_COL_ID_ARMURE));
         armure.setDefense(c.getInt(NUM_COL_DEFENSE_ARMURE));
+        armure.setLienImage(c.getString(NUM_COL_IMAGE_ARMURE));
 
         if (c.getInt(NUM_COL_DEBLOQUE_ARMURE) == 0){
             armure.setDebloque(false);
