@@ -289,6 +289,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Log.v("Insertion base arme", "Base remplie");
         }
+
+        cursor = db.rawQuery("select * from table_armure", null);
+        if(cursor.getCount()>0){
+            Log.v("Insertion base armure", "Base déjà remplie");
+        }else{
+            Armure armure0 = new Armure(1, "", 10, "armure_ailes");
+            Armure armure1 = new Armure(2, "", 10, "armure_casque");
+            Armure armure2 = new Armure(3, "", 10, "armure_dentier");
+            Armure armure3 = new Armure(4, "", 10, "armure_parapluie");
+            Armure armure4 = new Armure(5, "", 10, "armure_ring");
+            Armure armure5 = new Armure(6, "", 10, "armure_robe");
+            Armure armure6 = new Armure(7, "", 10, "armure_saddle");
+            Armure armure7 = new Armure(8, "", 10, "armure_shield");
+            Armure armure8 = new Armure(9, "", 10, "armure_shoes");
+            Armure armure9 = new Armure(10, "", 10, "armure_torse");
+
+            monstreBDD.insertArmure(armure0);
+            monstreBDD.insertArmure(armure1);
+            monstreBDD.insertArmure(armure2);
+            monstreBDD.insertArmure(armure3);
+            monstreBDD.insertArmure(armure4);
+            monstreBDD.insertArmure(armure5);
+            monstreBDD.insertArmure(armure6);
+            monstreBDD.insertArmure(armure7);
+            monstreBDD.insertArmure(armure8);
+            monstreBDD.insertArmure(armure9);
+
+            Log.v("Insertion base armure", "Base remplie");
+        }
         //On close la BDD
         monstreBDD.close();
     }

@@ -21,11 +21,12 @@ public class Armure {
 
     public Armure (){}
 
-    public Armure (int id, String nom, int defense){
+    public Armure (int id, String nom, int defense, String lienImage){
         this.id=id;
         this.debloque=false;
         this.nom=nom;
         this.defense=defense;
+        this.lienImage = lienImage;
     }
 
     public int getId() {

@@ -27,7 +27,7 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
     private static final String COL_DEBLOQUE_ARME = "debloque";
     private static final String COL_NOM_ARME = "nom";
     private static final String COL_ATTAQUE_ARME = "attaque";
-
+    private static final String COL_IMAGE_ARME = "lienImage";
 
     //Armures
     private static final String TABLE_ARMURE = "table_armure";
@@ -50,7 +50,8 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
             + COL_ID_ARME + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_DEBLOQUE_ARME + " BOOLEAN NOT NULL, "
             + COL_NOM_ARME + " TEXT NOT NULL, "
-            + COL_ATTAQUE_ARME + " INTEGER NOT NULL "
+            + COL_ATTAQUE_ARME + " INTEGER NOT NULL, "
+            + COL_IMAGE_ARME + " TEXT NOT NULL "
             + ");";
 
     private  static final String CREATE_BDD_ARMURE = "CREATE TABLE " + TABLE_ARMURE + " ("
