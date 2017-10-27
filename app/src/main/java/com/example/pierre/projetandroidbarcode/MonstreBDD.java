@@ -42,8 +42,10 @@ public class MonstreBDD {
 
 
     //ARMES
+    private static final String TABLE_ARME = "table_arme";
+
     private static final String COL_ID_ARME = "id";
-    private static final int NUM_COL_ARME_ID = 0;
+    private static final int NUM_COL_ID_ARME = 0;
 
     private static final String COL_DEBLOQUE_ARME = "debloque";
     private static final int NUM_COL_DEBLOQUE_ARME = 1;
@@ -52,23 +54,28 @@ public class MonstreBDD {
     private static final int NUM_COL_NOM_ARME = 2;
 
     private static final String COL_ATTAQUE_ARME = "attaque";
-    private static final int NUM_COL_ATTAQUE_ARM = 3;
+    private static final int NUM_COL_ATTAQUE_ARME = 3;
+
+    private static final String COL_IMAGE_ARME = "lienImage";
+    private static final int NUM_COL_IMAGE_ARME = 4;
 
 
     //ARMURES
     private static final String TABLE_ARMURE = "table_armure";
 
-
     private static final String COL_ID_ARMURE = "id";
-    private static final int NUM_COL_ID_ARMURE= 0;
+    private static final int NUM_COL_ID_ARMURE = 0;
+
 
     private static final String COL_DEBLOQUE_ARMURE = "debloque";
-
+    private static final int NUM_COL_DEBLOQUE_ARMURE = 1;
 
     private static final String COL_NOM_ARMURE = "nom";
-
+    private static final int NUM_COL_NOM_ARMURE = 2;
 
     private static final String COL_DEFENSE_ARMURE = "defense";
+    private static final int NUM_COL_DEFENSE_ARMURE = 3;
+
 
     private SQLiteDatabase bdd;
 
@@ -105,6 +112,27 @@ public class MonstreBDD {
         values.put(COL_SELECTIONNE, monstre.isSelectionne());
         //on insère l'objet dans la BDD via le ContentValues
         return bdd.insert(TABLE_MONSTRE, null, values);
+    }
+
+    public long insertArme(Arme arme){
+        ContentValues values = new ContentValues();
+
+        values.put(COL_NOM_ARME, arme.getNom());
+        values.put(COL_ATTAQUE_ARME, arme.getAttaque());
+        values.put(COL_DEBLOQUE_ARME, arme.isDebloque());
+        values.put(COL_IMAGE_ARME, arme.getLienImage());
+        //on insère l'objet dans la BDD via le ContentValues
+        return bdd.insert(TABLE_ARME, null, values);
+    }
+
+    public long insertArmure(Armure armure){
+        ContentValues values = new ContentValues();
+
+        values.put(COL_NOM_ARMURE, armure.getNom());
+        values.put(COL_DEFENSE_ARMURE, armure.getDefense());
+        values.put(COL_DEBLOQUE_ARMURE, armure.isDebloque());
+        //on insère l'objet dans la BDD via le ContentValues
+        return bdd.insert(TABLE_ARMURE, null, values);
     }
 
     public int updateMonstre(int id, Monstre monstre){
@@ -160,12 +188,61 @@ public class MonstreBDD {
         return cursorToMonstre(c);
     }
 
+    public Arme getArmeWithID(int id){
+        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME}, COL_ID_ARME + " = " + id, null, null, null, null, null);
+        return cursorToArme(c);
+    }
+
+    public Armure getArmureWithID(int id){
+        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
+        return cursorToArmure(c);
+    }
+
     public ArrayList<Monstre> getAllMonstres(){
         ArrayList<Monstre> listeMonstre = new ArrayList<>();
         for (int i=1; i<11; i++){
             listeMonstre.add(getMonstreWithID(i));
         }
         return listeMonstre;
+    }
+
+    private Arme cursorToArme(Cursor c){
+        if (c.getCount() == 0){
+            return null;
+        }
+        c.moveToFirst();
+        Arme arme = new Arme();
+        arme.setAttaque(c.getInt(NUM_COL_ATTAQUE_ARME));
+        arme.setId(c.getInt(NUM_COL_ID_ARME));
+        arme.setNom(c.getString(NUM_COL_NOM_ARME));
+        arme.setLienImage(c.getString(NUM_COL_IMAGE_ARME));
+        if (c.getInt(NUM_COL_DEBLOQUE_ARME) == 0){
+            arme.setDebloque(false);
+        }else{
+            arme.setDebloque(true);
+        }
+        //On ferme le cursor
+        c.close();
+        return arme;
+    }
+
+    private Armure cursorToArmure(Cursor c){
+        if (c.getCount() == 0){
+            return null;
+        }
+        c.moveToFirst();
+        Armure armure = new Armure();
+        armure.setNom(c.getString(NUM_COL_NOM_ARMURE));
+        armure.setId(c.getInt(NUM_COL_ID_ARMURE));
+        armure.setDefense(c.getInt(NUM_COL_DEFENSE_ARMURE));
+        if (c.getInt(NUM_COL_DEBLOQUE_ARMURE) == 0){
+            armure.setDebloque(false);
+        }else{
+            armure.setDebloque(true);
+        }
+        //On ferme le cursor
+        c.close();
+        return armure;
     }
 
     //Cette méthode permet de convertir un cursor en un livre
@@ -198,7 +275,7 @@ public class MonstreBDD {
         //On ferme le cursor
         c.close();
 
-        //On retourne le livre
+        //On retourne le monstre
         return monstre;
     }
 
