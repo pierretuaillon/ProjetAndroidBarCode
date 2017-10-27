@@ -76,6 +76,8 @@ public class MonstreBDD {
     private static final String COL_DEFENSE_ARMURE = "defense";
     private static final int NUM_COL_DEFENSE_ARMURE = 3;
 
+    private static final String COL_IMAGE_ARMURE = "lienImage";
+    private static final int NUM_COL_IMAGE_ARMURE = 4;
 
     private SQLiteDatabase bdd;
 
@@ -131,6 +133,7 @@ public class MonstreBDD {
         values.put(COL_NOM_ARMURE, armure.getNom());
         values.put(COL_DEFENSE_ARMURE, armure.getDefense());
         values.put(COL_DEBLOQUE_ARMURE, armure.isDebloque());
+        values.put(COL_IMAGE_ARMURE, armure.getLienImage());
         //on insère l'objet dans la BDD via le ContentValues
         return bdd.insert(TABLE_ARMURE, null, values);
     }
@@ -202,7 +205,7 @@ public class MonstreBDD {
     }
 
     public Armure getArmureWithID(int id){
-        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
+        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE, COL_IMAGE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
         return cursorToArmure(c);
     }
 
@@ -251,6 +254,7 @@ public class MonstreBDD {
         armure.setNom(c.getString(NUM_COL_NOM_ARMURE));
         armure.setId(c.getInt(NUM_COL_ID_ARMURE));
         armure.setDefense(c.getInt(NUM_COL_DEFENSE_ARMURE));
+
         if (c.getInt(NUM_COL_DEBLOQUE_ARMURE) == 0){
             armure.setDebloque(false);
         }else{

@@ -294,16 +294,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(cursor.getCount()>0){
             Log.v("Insertion base armure", "Base déjà remplie");
         }else{
-            Armure armure0 = new Armure(1, "", 10, "armure_ailes");
-            Armure armure1 = new Armure(2, "", 10, "armure_casque");
-            Armure armure2 = new Armure(3, "", 10, "armure_dentier");
-            Armure armure3 = new Armure(4, "", 10, "armure_parapluie");
-            Armure armure4 = new Armure(5, "", 10, "armure_ring");
-            Armure armure5 = new Armure(6, "", 10, "armure_robe");
-            Armure armure6 = new Armure(7, "", 10, "armure_saddle");
-            Armure armure7 = new Armure(8, "", 10, "armure_shield");
-            Armure armure8 = new Armure(9, "", 10, "armure_shoes");
-            Armure armure9 = new Armure(10, "", 10, "armure_torse");
+            Armure armure0 = new Armure(1, "Les ailes d'Icare", 10, "armure_ailes");
+            Armure armure1 = new Armure(2, "Le casque à pointe", 10, "armure_casque");
+            Armure armure2 = new Armure(3, "Le dentier de mamie", 10, "armure_dentier");
+            Armure armure3 = new Armure(4, "L'anti faciale", 10, "armure_parapluie");
+            Armure armure4 = new Armure(5, "L'Anneau vagi", 10, "armure_ring");
+            Armure armure5 = new Armure(6, "La robe", 10, "armure_robe");
+            Armure armure6 = new Armure(7, "La monture", 10, "armure_saddle");
+            Armure armure7 = new Armure(8, "Le bouclier du captain", 10, "armure_shield");
+            Armure armure8 = new Armure(9, "Les chaussures de Sonic", 10, "armure_shoes");
+            Armure armure9 = new Armure(10, "Le plastron de maman", 10, "armure_torse");
 
             monstreBDD.insertArmure(armure0);
             monstreBDD.insertArmure(armure1);
@@ -320,26 +320,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         //On close la BDD
         monstreBDD.close();
-    }
-
-    public void testerData(){
-        //Création d'une instance de ma classe LivresBDD
-        MonstreBDD monstreBDD = new MonstreBDD(this);
-
-        //On ouvre la base de données pour écrire dedans
-        monstreBDD.open();
-
-        Monstre m = monstreBDD.getMonstreWithID(1);
-
-        if(m == null){
-            Toast.makeText(this, "Ce monstre n'existe pas dans la BDD", Toast.LENGTH_LONG).show();
-        }else{
-
-            Toast.makeText(this, "Ce monstre existe dans la BDD", Toast.LENGTH_LONG).show();
-        }
-
-        monstreBDD.close();
-
     }
 
     public int[] algoTraitement(String content){
@@ -414,6 +394,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // other 'case' lines to check for other
             // permissions this app might request
         }
+    }
+
+    public void testerData(){
+        //Création d'une instance de ma classe LivresBDD
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+
+        //On ouvre la base de données pour écrire dedans
+        monstreBDD.open();
+
+        Monstre m = monstreBDD.getMonstreWithID(1);
+
+        if(m == null){
+            Toast.makeText(this, "Ce monstre n'existe pas dans la BDD", Toast.LENGTH_LONG).show();
+        }else{
+
+            Toast.makeText(this, "Ce monstre existe dans la BDD", Toast.LENGTH_LONG).show();
+        }
+        monstreBDD.close();
     }
 
 }
