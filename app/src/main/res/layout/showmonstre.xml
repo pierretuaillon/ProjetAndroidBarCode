@@ -20,8 +20,10 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:srcCompat="@drawable/dragon_squellette"
+        app:srcCompat="@drawable/question_mark"
         android:layout_below="@id/nomMonstre"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
         />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -94,20 +96,21 @@
         android:layout_height="60dp"
         >
 
-        <Button
+        <ImageView
             android:id="@+id/armesBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:text="Armes"
             android:layout_weight="1"
+            app:srcCompat="@drawable/question_mark"
             />
 
-        <Button
+        <ImageView
             android:id="@+id/armuresBtn"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:text="Armures"
             android:layout_weight="1"
+            app:srcCompat="@drawable/question_mark"
             />
 
 

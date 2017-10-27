@@ -19,8 +19,8 @@ import java.net.URI;
 public class MonstreActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView nomMonstreView;
-    private Button armesBtn;
-    private Button armuresBtn;
+    private ImageView armesBtn;
+    private ImageView armuresBtn;
     private Button button;
     private ImageView  imageView;
 
@@ -31,11 +31,11 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         nomMonstreView = (TextView) findViewById(R.id.nomMonstre);
         imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setOnClickListener(this);
-        armesBtn = (Button) findViewById(R.id.armesBtn);
+        armesBtn = (ImageView) findViewById(R.id.armesBtn);
         armesBtn.setOnClickListener(this);
         Button retourBtn = (Button) findViewById(R.id.retourBtn);
         retourBtn.setOnClickListener(this);
-        armuresBtn = (Button) findViewById(R.id.armuresBtn);
+        armuresBtn = (ImageView) findViewById(R.id.armuresBtn);
         armuresBtn.setOnClickListener(this);
 
         Intent source = getIntent();
@@ -56,13 +56,30 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         imageView.setImageResource(
                 this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
         nomMonstreView.setText(monstreAfficcher.getNom());
+        monstreBDD.close();
+    }
+    public void mettreAJourArme(int id){
+        //Création d'une instance de ma classe LivresBDD
+        Log.v("IDENTIFIANT arme2 : ", Integer.toString(id));
+        MonstreBDD monstreBDD = new MonstreBDD(this);
 
+        //On ouvre la base de données pour écrire dedans
+        monstreBDD.open();
+        monstreBDD.selectArme(id);
+        armesBtn.setImageResource(
+                this.getResources().getIdentifier(monstreBDD.getArmeWithID(id).getLienImage().toLowerCase(), "drawable", getPackageName()));
+        monstreBDD.close();
+    }
+    public void mettreAJourArmure(int id){
+        //Création d'une instance de ma classe LivresBDD
+        Log.v("IDENTIFIANT armure2 : ", Integer.toString(id));
+        MonstreBDD monstreBDD = new MonstreBDD(this);
 
-        //MonstreActivity.getAppContext().getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable",
-        //      MainActivity.getAppContext().getPackageName()));
-
-
-
+        //On ouvre la base de données pour écrire dedans
+        monstreBDD.open();
+        monstreBDD.selectArmure(id);
+        armuresBtn.setImageResource(
+                this.getResources().getIdentifier(monstreBDD.getArmureWithID(id).getLienImage().toLowerCase(), "drawable", getPackageName()));
         monstreBDD.close();
     }
 
@@ -97,10 +114,12 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
 
                 break;
             case 25://arme
-
+                if(resultCode==RESULT_OK)
+                    mettreAJourArme(intent.getIntExtra("id", -1));
                 break;
             case 26://armure
-
+                if(resultCode==RESULT_OK)
+                    mettreAJourArmure(intent.getIntExtra("id", -1));
                 break;
             case 27://dragon
                 if(resultCode==RESULT_OK)

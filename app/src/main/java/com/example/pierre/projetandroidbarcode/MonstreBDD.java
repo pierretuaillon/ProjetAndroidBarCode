@@ -175,6 +175,21 @@ public class MonstreBDD {
         return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
     }
 
+    public void selectArme(int id){
+        ContentValues values = new ContentValues();
+        values.put(COL_SELECTIONNE, 0);
+        bdd.update(TABLE_ARME, values, null, null);
+        values.put(COL_SELECTIONNE, 1);
+        bdd.update(TABLE_ARME, values, COL_ID + " = " +id, null);
+    }
+    public void selectArmure(int id){
+        ContentValues values = new ContentValues();
+        values.put(COL_SELECTIONNE, 0);
+        bdd.update(TABLE_ARMURE, values, null, null);
+        values.put(COL_SELECTIONNE, 1);
+        bdd.update(TABLE_ARMURE, values, COL_ID + " = " +id, null);
+    }
+
     public int removeMonstreWithID(int id){
         //Suppression d'un livre de la BDD grâce à l'ID
         return bdd.delete(TABLE_MONSTRE, COL_ID + " = " +id, null);

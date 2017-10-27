@@ -1,10 +1,12 @@
 package com.example.pierre.projetandroidbarcode;
 
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -33,6 +35,17 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         lv.setAdapter(this);
         Button retour = (Button) findViewById(R.id.btn);
         retour.setOnClickListener(this);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Arme arme = getItem(position);
+                Intent intent = new Intent();
+                intent.putExtra("id", arme.getId());
+                setResult(RESULT_OK,intent);
+                finish();
+
+            }
+        });
     }
 
     @Override
@@ -67,7 +80,7 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
     }
 
     @Override
-    public Object getItem(int position) {
+    public Arme getItem(int position) {
         return armes.get(position);
     }
 
