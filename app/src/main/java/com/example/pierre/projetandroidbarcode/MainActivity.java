@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else if (tabInt[1] >= 90 && tabInt[1] < 100) {
                         intentRedirectionScan.putExtra("MonstreID", 10);
                     }
+                    intentRedirectionScan.putExtra("PDV", tabInt[2]);
+                    intentRedirectionScan.putExtra("PDA", tabInt[3]);
                     startActivityForResult(intentRedirectionScan, 23);
 
                     //Debloque une arme
@@ -174,46 +176,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
                     //Shasos
                     if (tabInt[1] >= 0 && tabInt[1] < 10) {
-                        intentRedirectionScan.putExtra("MonstreID", 1);
+                        intentRedirectionScan.putExtra("ArmeID", 1);
                         //Brassso
                     } else if (tabInt[1] >= 10 && tabInt[1] < 20) {
-                        intentRedirectionScan.putExtra("MonstreID", 2);
+                        intentRedirectionScan.putExtra("ArmeID", 2);
                         //Thrakhorn
                     } else if (tabInt[1] >= 20 && tabInt[1] < 30) {
-                        intentRedirectionScan.putExtra("MonstreID", 3);
+                        intentRedirectionScan.putExtra("ArmeID", 3);
                         //Stynfu
                     } else if (tabInt[1] >= 30 && tabInt[1] < 40) {
-                        intentRedirectionScan.putExtra("MonstreID", 4);
+                        intentRedirectionScan.putExtra("ArmeID", 4);
                         //Darzur
                     } else if (tabInt[1] >= 40 && tabInt[1] < 50) {
-                        intentRedirectionScan.putExtra("MonstreID", 5);
+                        intentRedirectionScan.putExtra("ArmeID", 5);
                         //Wingdra
                     } else if (tabInt[1] >= 50 && tabInt[1] < 60) {
-                        intentRedirectionScan.putExtra("MonstreID", 6);
+                        intentRedirectionScan.putExtra("ArmeID", 6);
                         //Feha
                     } else if (tabInt[1] >= 60 && tabInt[1] < 70) {
-                        intentRedirectionScan.putExtra("MonstreID", 7);
+                        intentRedirectionScan.putExtra("ArmeID", 7);
                         //Claw
                     } else if (tabInt[1] >= 70 && tabInt[1] < 80) {
-                        intentRedirectionScan.putExtra("MonstreID", 8);
+                        intentRedirectionScan.putExtra("ArmeID", 8);
                         //Roca
                     } else if (tabInt[1] >= 80 && tabInt[1] < 90) {
-                        intentRedirectionScan.putExtra("MonstreID", 9);
+                        intentRedirectionScan.putExtra("ArmeID", 9);
                         //Lexcirhet
                     } else if (tabInt[1] >= 90 && tabInt[1] < 100) {
-                        intentRedirectionScan.putExtra("MonstreID", 10);
+                        intentRedirectionScan.putExtra("ArmeID", 10);
                     }
+                    intentRedirectionScan.putExtra("PDA", tabInt[2]);
                     startActivityForResult(intentRedirectionScan, 15);
 
 
                     //Debloque une armure
                 } else {
-
+                    Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                    if (tabInt[1] >= 0 && tabInt[1] < 10) {
+                        intentRedirectionScan.putExtra("ArmureID", 1);
+                    } else if (tabInt[1] >= 10 && tabInt[1] < 20) {
+                        intentRedirectionScan.putExtra("ArmureID", 2);
+                    } else if (tabInt[1] >= 20 && tabInt[1] < 30) {
+                        intentRedirectionScan.putExtra("ArmureID", 3);
+                    } else if (tabInt[1] >= 30 && tabInt[1] < 40) {
+                        intentRedirectionScan.putExtra("ArmureID", 4);
+                    } else if (tabInt[1] >= 40 && tabInt[1] < 50) {
+                        intentRedirectionScan.putExtra("ArmureID", 5);
+                    } else if (tabInt[1] >= 50 && tabInt[1] < 60) {
+                        intentRedirectionScan.putExtra("ArmureID", 6);
+                    } else if (tabInt[1] >= 60 && tabInt[1] < 70) {
+                        intentRedirectionScan.putExtra("ArmureID", 7);
+                    } else if (tabInt[1] >= 70 && tabInt[1] < 80) {
+                        intentRedirectionScan.putExtra("ArmureID", 8);
+                    } else if (tabInt[1] >= 80 && tabInt[1] < 90) {
+                        intentRedirectionScan.putExtra("ArmureID", 9);
+                    } else if (tabInt[1] >= 90 && tabInt[1] < 100) {
+                        intentRedirectionScan.putExtra("ArmureID", 10);
+                    }
+                    intentRedirectionScan.putExtra("Armure", tabInt[2]);
+                    startActivityForResult(intentRedirectionScan, 10);
                 }
-
             }
         }
-
     }
 
     @Override
@@ -273,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Arme arme0 = new Arme(1, "Le taser", 10, "arme_electric");
             Arme arme1 = new Arme(2, "Le briquet", 10, "arme_fire");
             Arme arme2 = new Arme(3, "Le fister", 10, "arme_fighting");
-            Arme arme3 = new Arme(4, "La plume d'oreiller", 10, "");
+            Arme arme3 = new Arme(4, "La plume d'oreiller", 10, "arme_flying");
             Arme arme4 = new Arme(5, "La beuh", 10, "arme_grass");
             Arme arme5 = new Arme(6, "Le glaçon Frigide", 10, "arme_ice");
             Arme arme6 = new Arme(7, "Le classic", 10, "arme_normal");
