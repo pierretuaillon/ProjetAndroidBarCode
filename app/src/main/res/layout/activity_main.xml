@@ -16,19 +16,23 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Scanner un code barre"
-        android:layout_below="@+id/monstre_button"/>
+        />
 
     <Button android:id="@+id/monstre_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Mon dragon"/>
+        android:text="Mon dragon"
+        android:layout_below="@id/scan_button"
+        />
 
     <Button android:id="@+id/bagarreLocal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Bagarre local"/>
+        android:text="Bagarre local"
+        android:layout_below="@id/monstre_button"
+        />
 
     <TextView
         android:id="@+id/scan_format"
@@ -36,7 +40,7 @@
         android:layout_height="20dp"
         android:textIsSelectable="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/scan_button"
+        android:layout_below="@id/bagarreLocal"
      />
 
     <TextView

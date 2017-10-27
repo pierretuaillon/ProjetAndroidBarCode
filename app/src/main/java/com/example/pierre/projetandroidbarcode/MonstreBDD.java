@@ -192,7 +192,7 @@ public class MonstreBDD {
     }
 
     public Arme getArmeWithID(int id){
-        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME}, COL_ID_ARME + " = " + id, null, null, null, null, null);
+        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME, COL_DEBLOQUE_ARME}, COL_ID_ARME + " = " + id, null, null, null, null, null);
         return cursorToArme(c);
     }
 

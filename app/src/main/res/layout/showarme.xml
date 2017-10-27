@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/nomArme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nom de l'arme"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:textIsSelectable="false"
+        android:layout_centerHorizontal="true"
+        android:height="30dp" />
+
+    <ImageView
+        android:id="@+id/imageViewArme"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/arme"
+        android:layout_below="@id/nomArme"
+        />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/pda"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="+ 10 PDA"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/retourBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Retour"
+        />
 
 </LinearLayout>
