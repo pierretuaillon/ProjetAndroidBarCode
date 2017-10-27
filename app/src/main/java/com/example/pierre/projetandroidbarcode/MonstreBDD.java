@@ -177,16 +177,16 @@ public class MonstreBDD {
 
     public void selectArme(int id){
         ContentValues values = new ContentValues();
-        values.put(COL_SELECTIONNE, 0);
+        values.put(COL_SELECTIONNE, false);
         bdd.update(TABLE_ARME, values, null, null);
-        values.put(COL_SELECTIONNE, 1);
+        values.put(COL_SELECTIONNE, true);
         bdd.update(TABLE_ARME, values, COL_ID + " = " +id, null);
     }
     public void selectArmure(int id){
         ContentValues values = new ContentValues();
-        values.put(COL_SELECTIONNE, 0);
+        values.put(COL_SELECTIONNE, false);
         bdd.update(TABLE_ARMURE, values, null, null);
-        values.put(COL_SELECTIONNE, 1);
+        values.put(COL_SELECTIONNE, true);
         bdd.update(TABLE_ARMURE, values, COL_ID + " = " +id, null);
     }
 
