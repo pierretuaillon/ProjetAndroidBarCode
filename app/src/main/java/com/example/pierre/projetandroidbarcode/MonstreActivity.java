@@ -96,14 +96,15 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
             case 23 :
 
                 break;
-            case 25:
+            case 25://arme
 
                 break;
-            case 26:
+            case 26://armure
 
                 break;
-            case 27:
-
+            case 27://dragon
+                if(resultCode==RESULT_OK)
+                    mettreAJourMonstre(intent.getIntExtra("monstre", -1));
                 break;
         }
 

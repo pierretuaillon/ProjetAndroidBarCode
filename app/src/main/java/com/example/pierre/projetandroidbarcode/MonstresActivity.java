@@ -1,5 +1,6 @@
 package com.example.pierre.projetandroidbarcode;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -33,6 +36,17 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         lv = (ListView) findViewById(R.id.list);
         monstreBDD.close();
         lv.setAdapter(this);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Monstre monstre = getItem(position);
+                Intent intent = new Intent();
+                intent.putExtra("monstre", monstre.getId());
+                setResult(RESULT_OK,intent);
+                finish();
+
+            }
+        });
         Button retour = (Button) findViewById(R.id.btn);
         retour.setOnClickListener(this);
     }
@@ -72,7 +86,7 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
     }
 
     @Override
-    public Object getItem(int position) {
+    public Monstre getItem(int position) {
         return monstres.get(position);
     }
 
@@ -94,13 +108,14 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         }
         else
             returnView = convertView;
+        Monstre monstre = monstres.get(position);
         TextView tx1 = (TextView) returnView.findViewById(R.id.tx1);
-        tx1.setText(monstres.get(position).getNom());
+        tx1.setText(monstre.getNom());
         TextView tx2 = (TextView) returnView.findViewById(R.id.tx2);
-        tx2.setText("PDV:"+monstres.get(position).getPDV()+" PDA:"+monstres.get(position).getPDA());
+        tx2.setText("PDV:"+monstre.getPDV()+" PDA:"+monstres.get(position).getPDA());
         ImageView img = (ImageView) returnView.findViewById(R.id.img);
         img.setImageResource(
-                this.getResources().getIdentifier(monstres.get(position).getApparence().toLowerCase(), "drawable", getPackageName()));
+                this.getResources().getIdentifier(monstre.getApparence().toLowerCase(), "drawable", getPackageName()));
         return returnView;
     }
 
