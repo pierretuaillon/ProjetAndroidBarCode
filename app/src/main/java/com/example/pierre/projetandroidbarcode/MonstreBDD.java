@@ -193,7 +193,7 @@ public class MonstreBDD {
         return cursorToArme(c);
     }
 
-    public ArrayList<Arme> getAllArme(){
+    public ArrayList<Arme> getAllArmes(){
         ArrayList<Arme>  listeArme = new ArrayList<>();
         for (int i=1; i<11; i++){
             listeArme.add(getArmeWithID(i));
@@ -206,7 +206,7 @@ public class MonstreBDD {
         return cursorToArmure(c);
     }
 
-    public ArrayList<Armure> getAllArmure(){
+    public ArrayList<Armure> getAllArmures(){
         ArrayList<Armure> listeArmure = new ArrayList<>();
         for (int i=1; i<11; i++){
             listeArmure.add(getArmureWithID(i));

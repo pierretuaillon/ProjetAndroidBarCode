@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,8 +27,10 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         super.onCreate(state);
         setContentView(R.layout.showmonstres);
         MonstreBDD monstreBDD = new MonstreBDD(this);
+        monstreBDD.open();
         monstres = monstreBDD.getAllMonstres();
         lv = (ListView) findViewById(R.id.list);
+        monstreBDD.close();
         lv.setAdapter(this);
     }
 
@@ -92,6 +95,9 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         tx1.setText(monstres.get(position).getNom());
         TextView tx2 = (TextView) returnView.findViewById(R.id.tx2);
         tx2.setText("PDV:"+monstres.get(position).getPDV()+" PDA:"+monstres.get(position).getPDA());
+        ImageView img = (ImageView) returnView.findViewById(R.id.img);
+        img.setImageResource(
+                this.getResources().getIdentifier(monstres.get(position).getApparence().toLowerCase(), "drawable", getPackageName()));
         return returnView;
     }
 

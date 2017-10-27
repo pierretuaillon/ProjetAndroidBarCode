@@ -30,7 +30,7 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.showmonstre);
         nomMonstreView = (TextView) findViewById(R.id.nomMonstre);
         imageView = (ImageView) findViewById(R.id.imageView);
-        //imageView.setOnClickListener(this);
+        imageView.setOnClickListener(this);
         armesBtn = (Button) findViewById(R.id.armesBtn);
         armesBtn.setOnClickListener(this);
         armuresBtn = (Button) findViewById(R.id.armuresBtn);

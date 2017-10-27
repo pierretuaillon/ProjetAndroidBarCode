@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,8 +24,10 @@ public class ArmuresActivity extends AppCompatActivity implements ListAdapter, V
         super.onCreate(state);
         setContentView(R.layout.showarmures);
         MonstreBDD monstreBDD = new MonstreBDD(this);
-        //armures = monstreBDD.getAllArmures();
+        monstreBDD.open();
+        armures = monstreBDD.getAllArmures();
         lv = (ListView) findViewById(R.id.list);
+        monstreBDD.close();
         lv.setAdapter(this);
     }
 
@@ -85,6 +88,9 @@ public class ArmuresActivity extends AppCompatActivity implements ListAdapter, V
         tx1.setText(armures.get(position).getNom());
         TextView tx2 = (TextView) returnView.findViewById(R.id.tx2);
         tx2.setText("Def:"+armures.get(position).getDefense());
+        ImageView img = (ImageView) returnView.findViewById(R.id.img);
+        img.setImageResource(
+                this.getResources().getIdentifier(armures.get(position).getLienImage().toLowerCase(), "drawable", getPackageName()));
         return returnView;
     }
 

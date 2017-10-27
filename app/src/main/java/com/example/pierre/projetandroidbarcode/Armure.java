@@ -9,6 +9,15 @@ public class Armure {
     private boolean debloque;
     private String nom;
     private int defense;
+    private String lienImage;
+
+    public String getLienImage() {
+        return lienImage;
+    }
+
+    public void setLienImage(String lienImage) {
+        this.lienImage = lienImage;
+    }
 
     public Armure (){}
 
