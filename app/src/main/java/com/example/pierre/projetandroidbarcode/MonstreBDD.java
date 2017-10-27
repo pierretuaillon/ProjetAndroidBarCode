@@ -57,10 +57,10 @@ public class MonstreBDD {
 
     //ARMURES
     private static final String TABLE_ARMURE = "table_armure";
-    private static final int NUM_COL_ARME_ID = 0;
+
 
     private static final String COL_ID_ARMURE = "id";
-
+    private static final int NUM_COL_ID_ARMURE= 0;
 
     private static final String COL_DEBLOQUE_ARMURE = "debloque";
 
