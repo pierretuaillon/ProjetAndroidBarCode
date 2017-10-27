@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -32,6 +33,8 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         lv = (ListView) findViewById(R.id.list);
         monstreBDD.close();
         lv.setAdapter(this);
+        Button retour = (Button) findViewById(R.id.btn);
+        retour.setOnClickListener(this);
     }
 
     @Override

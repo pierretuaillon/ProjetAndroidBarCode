@@ -33,11 +33,14 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         imageView.setOnClickListener(this);
         armesBtn = (Button) findViewById(R.id.armesBtn);
         armesBtn.setOnClickListener(this);
+        Button retourBtn = (Button) findViewById(R.id.retourBtn);
+        retourBtn.setOnClickListener(this);
         armuresBtn = (Button) findViewById(R.id.armuresBtn);
         armuresBtn.setOnClickListener(this);
 
         Intent source = getIntent();
         Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
+        if(source.hasExtra("MonstreID"))
         mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
 
     }
@@ -78,6 +81,9 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.imageView:
                 intent = new Intent(MonstreActivity.this, MonstresActivity.class);
                 startActivityForResult(intent,27);
+                break;
+            case R.id.retourBtn:
+                finish();
                 break;
             default:
 

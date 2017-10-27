@@ -36,9 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         bScan = (Button) findViewById(R.id.scan_button);
+        Button MonstreBtn = (Button) findViewById(R.id.monstre_button);
         txtFormat = (TextView) findViewById(R.id.scan_format);
         txtContent = (TextView) findViewById(R.id.scan_content);
         bScan.setOnClickListener(this);
+        MonstreBtn.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
@@ -120,104 +122,108 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve scan result
-        if(intent.getStringExtra("scan_format") != null){
-            Log.v("Scan format Main", intent.getStringExtra("scan_format"));
-            txtFormat.setText(intent.getStringExtra("scan_format"));
-        }
-        if (intent.getStringExtra("scan_content") != null){
-            Log.v("Scan content Main", intent.getStringExtra("scan_content"));
-            txtContent.setText(intent.getStringExtra("scan_content"));
-            int [] tabInt = new int[4];
-            tabInt = algoTraitement(intent.getStringExtra("scan_content"));
+        if(requestCode==22&&resultCode==RESULT_OK){
+            if(intent.getStringExtra("scan_format") != null){
+                Log.v("Scan format Main", intent.getStringExtra("scan_format"));
+                txtFormat.setText(intent.getStringExtra("scan_format"));
+            }
+            if (intent.getStringExtra("scan_content") != null) {
+                Log.v("Scan content Main", intent.getStringExtra("scan_content"));
+                txtContent.setText(intent.getStringExtra("scan_content"));
+                int[] tabInt = new int[4];
+                tabInt = algoTraitement(intent.getStringExtra("scan_content"));
 
 
+                if (tabInt[0] >= 0 && tabInt[0] < 20) {
+                    Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                    //Shasos
+                    if (tabInt[1] >= 0 && tabInt[1] < 10) {
+                        intentRedirectionScan.putExtra("MonstreID", 1);
+                        //Brassso
+                    } else if (tabInt[1] >= 10 && tabInt[1] < 20) {
+                        intentRedirectionScan.putExtra("MonstreID", 2);
+                        //Thrakhorn
+                    } else if (tabInt[1] >= 20 && tabInt[1] < 30) {
+                        intentRedirectionScan.putExtra("MonstreID", 3);
+                        //Stynfu
+                    } else if (tabInt[1] >= 30 && tabInt[1] < 40) {
+                        intentRedirectionScan.putExtra("MonstreID", 4);
+                        //Darzur
+                    } else if (tabInt[1] >= 40 && tabInt[1] < 50) {
+                        intentRedirectionScan.putExtra("MonstreID", 5);
+                        //Wingdra
+                    } else if (tabInt[1] >= 50 && tabInt[1] < 60) {
+                        intentRedirectionScan.putExtra("MonstreID", 6);
+                        //Feha
+                    } else if (tabInt[1] >= 60 && tabInt[1] < 70) {
+                        intentRedirectionScan.putExtra("MonstreID", 7);
+                        //Claw
+                    } else if (tabInt[1] >= 70 && tabInt[1] < 80) {
+                        intentRedirectionScan.putExtra("MonstreID", 8);
+                        //Roca
+                    } else if (tabInt[1] >= 80 && tabInt[1] < 90) {
+                        intentRedirectionScan.putExtra("MonstreID", 9);
+                        //Lexcirhet
+                    } else if (tabInt[1] >= 90 && tabInt[1] < 100) {
+                        intentRedirectionScan.putExtra("MonstreID", 10);
+                    }
+                    startActivityForResult(intentRedirectionScan, 23);
 
-            if(tabInt[0]>=0 && tabInt[0]<20){
-                Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
-                //Shasos
-                if (tabInt[1]>=0 && tabInt[1]<10 ){
-                    intentRedirectionScan.putExtra("MonstreID", 1);
-                    //Brassso
-                }else if(tabInt[1]>=10 && tabInt[1]<20){
-                    intentRedirectionScan.putExtra("MonstreID", 2);
-                    //Thrakhorn
-                }else if(tabInt[1]>=20 && tabInt[1]<30){
-                    intentRedirectionScan.putExtra("MonstreID", 3);
-                    //Stynfu
-                }else if (tabInt[1]>=30 && tabInt[1]<40){
-                    intentRedirectionScan.putExtra("MonstreID", 4);
-                    //Darzur
-                }else if (tabInt[1]>=40 && tabInt[1]<50){
-                    intentRedirectionScan.putExtra("MonstreID", 5);
-                    //Wingdra
-                }else if (tabInt[1]>=50 && tabInt[1]<60){
-                    intentRedirectionScan.putExtra("MonstreID", 6);
-                    //Feha
-                }else if (tabInt[1]>=60 && tabInt[1]<70){
-                    intentRedirectionScan.putExtra("MonstreID", 7);
-                    //Claw
-                }else if (tabInt[1]>=70 && tabInt[1]<80){
-                    intentRedirectionScan.putExtra("MonstreID", 8);
-                    //Roca
-                }else if (tabInt[1]>=80 && tabInt[1]<90){
-                    intentRedirectionScan.putExtra("MonstreID", 9);
-                    //Lexcirhet
-                }else if (tabInt[1]>=90 && tabInt[1]<100){
-                    intentRedirectionScan.putExtra("MonstreID", 10);
+                    //Debloque une arme
+                } else if (tabInt[0] >= 20 && tabInt[0] < 60) {
+                    Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                    //Shasos
+                    if (tabInt[1] >= 0 && tabInt[1] < 10) {
+                        intentRedirectionScan.putExtra("MonstreID", 1);
+                        //Brassso
+                    } else if (tabInt[1] >= 10 && tabInt[1] < 20) {
+                        intentRedirectionScan.putExtra("MonstreID", 2);
+                        //Thrakhorn
+                    } else if (tabInt[1] >= 20 && tabInt[1] < 30) {
+                        intentRedirectionScan.putExtra("MonstreID", 3);
+                        //Stynfu
+                    } else if (tabInt[1] >= 30 && tabInt[1] < 40) {
+                        intentRedirectionScan.putExtra("MonstreID", 4);
+                        //Darzur
+                    } else if (tabInt[1] >= 40 && tabInt[1] < 50) {
+                        intentRedirectionScan.putExtra("MonstreID", 5);
+                        //Wingdra
+                    } else if (tabInt[1] >= 50 && tabInt[1] < 60) {
+                        intentRedirectionScan.putExtra("MonstreID", 6);
+                        //Feha
+                    } else if (tabInt[1] >= 60 && tabInt[1] < 70) {
+                        intentRedirectionScan.putExtra("MonstreID", 7);
+                        //Claw
+                    } else if (tabInt[1] >= 70 && tabInt[1] < 80) {
+                        intentRedirectionScan.putExtra("MonstreID", 8);
+                        //Roca
+                    } else if (tabInt[1] >= 80 && tabInt[1] < 90) {
+                        intentRedirectionScan.putExtra("MonstreID", 9);
+                        //Lexcirhet
+                    } else if (tabInt[1] >= 90 && tabInt[1] < 100) {
+                        intentRedirectionScan.putExtra("MonstreID", 10);
+                    }
+                    startActivityForResult(intentRedirectionScan, 15);
+
+
+                    //Debloque une armure
+                } else {
+
                 }
-                startActivityForResult(intentRedirectionScan,23);
-
-                //Debloque une arme
-            }else if (tabInt[0]>=20 && tabInt[0]<60){
-                Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
-                //Shasos
-                if (tabInt[1]>=0 && tabInt[1]<10 ){
-                    intentRedirectionScan.putExtra("MonstreID", 1);
-                    //Brassso
-                }else if(tabInt[1]>=10 && tabInt[1]<20){
-                    intentRedirectionScan.putExtra("MonstreID", 2);
-                    //Thrakhorn
-                }else if(tabInt[1]>=20 && tabInt[1]<30){
-                    intentRedirectionScan.putExtra("MonstreID", 3);
-                    //Stynfu
-                }else if (tabInt[1]>=30 && tabInt[1]<40){
-                    intentRedirectionScan.putExtra("MonstreID", 4);
-                    //Darzur
-                }else if (tabInt[1]>=40 && tabInt[1]<50){
-                    intentRedirectionScan.putExtra("MonstreID", 5);
-                    //Wingdra
-                }else if (tabInt[1]>=50 && tabInt[1]<60){
-                    intentRedirectionScan.putExtra("MonstreID", 6);
-                    //Feha
-                }else if (tabInt[1]>=60 && tabInt[1]<70){
-                    intentRedirectionScan.putExtra("MonstreID", 7);
-                    //Claw
-                }else if (tabInt[1]>=70 && tabInt[1]<80){
-                    intentRedirectionScan.putExtra("MonstreID", 8);
-                    //Roca
-                }else if (tabInt[1]>=80 && tabInt[1]<90){
-                    intentRedirectionScan.putExtra("MonstreID", 9);
-                    //Lexcirhet
-                }else if (tabInt[1]>=90 && tabInt[1]<100){
-                    intentRedirectionScan.putExtra("MonstreID", 10);
-                }
-                startActivityForResult(intentRedirectionScan,15);
-
-
-                //Debloque une armure
-            }else{
 
             }
-
-
         }
 
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, LecteurCodeBarres.class);
-        startActivityForResult(intent,22);
+        if(v.getId()==R.id.scan_button){
+            Intent intent = new Intent(MainActivity.this, LecteurCodeBarres.class);
+            startActivityForResult(intent,22);}
+        if(v.getId()==R.id.monstre_button){
+            Intent intent = new Intent(MainActivity.this, MonstreActivity.class);
+            startActivityForResult(intent,15);}
     }
 
 
