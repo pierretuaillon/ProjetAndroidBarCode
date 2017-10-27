@@ -49,7 +49,7 @@ public class LecteurCodeBarres extends AppCompatActivity implements ZXingScanner
 
         intent.putExtra("scan_content",rawResult.getText());
         intent.putExtra("scan_format",rawResult.getBarcodeFormat().toString());
-        setResult( 22,intent);
+        setResult( RESULT_OK,intent);
         finish();
     }
 }

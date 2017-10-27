@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,11 +31,14 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         lv = (ListView) findViewById(R.id.list);
         monstreBDD.close();
         lv.setAdapter(this);
+        Button retour = (Button) findViewById(R.id.btn);
+        retour.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-
+        if(v.getId()==R.id.armesBtn)
+            finish();
     }
 
     @Override
