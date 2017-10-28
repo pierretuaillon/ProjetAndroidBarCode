@@ -1,5 +1,6 @@
 package com.example.pierre.projetandroidbarcode;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,9 +27,15 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         img = (ImageView) findViewById(R.id.imageViewArme);
         btnRetour = (Button) findViewById(R.id.retourBtn);
         btnRetour.setOnClickListener(this);
+        Intent source = getIntent();
+        if(source.hasExtra("ArmeID")){
+            if(source.hasExtra("PDA")){
+                mettreAJour(source.getIntExtra("ArmeID", -1), source.getIntExtra("PDA", -1));
+            }
+        }
     }
 
-    public void mettreAJour(int idArme){
+    public void mettreAJour(int idArme, int PDA){
         Log.v("IDENTIFIANT ARME : ", Integer.toString(idArme));
         MonstreBDD monstreBDD = new MonstreBDD(this);
 
@@ -36,6 +43,12 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         monstreBDD.open();
 
         Arme armeAfficher = monstreBDD.getArmeWithID(idArme);
+        nomArme.setText(armeAfficher.getNom());
+
+        img.setImageResource(
+                this.getResources().getIdentifier(armeAfficher.getLienImage().toLowerCase(), "drawable", getPackageName())
+        );
+        monstreBDD.close();
     }
 
     @Override
