@@ -38,12 +38,13 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Arme arme = getItem(position);
+            Arme arme = getItem(position);
+            if(arme.isDebloque()) {
                 Intent intent = new Intent();
                 intent.putExtra("id", arme.getId());
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
                 finish();
-
+            }
             }
         });
     }
@@ -102,13 +103,21 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         }
         else
             returnView = convertView;
+        Arme arme = armes.get(position);
         TextView tx1 = (TextView) returnView.findViewById(R.id.tx1);
-        tx1.setText(armes.get(position).getNom());
         TextView tx2 = (TextView) returnView.findViewById(R.id.tx2);
-        tx2.setText("Atq:"+armes.get(position).getAttaque());
         ImageView img = (ImageView) returnView.findViewById(R.id.img);
-        img.setImageResource(
-                this.getResources().getIdentifier(armes.get(position).getLienImage().toLowerCase(), "drawable", getPackageName()));
+        if(arme.isDebloque()) {
+            tx1.setText(arme.getNom());
+            tx2.setText("Atq:" + arme.getAttaque());
+            img.setImageResource(
+                    this.getResources().getIdentifier(arme.getLienImage().toLowerCase(), "drawable", getPackageName()));
+        }
+        else {
+            tx1.setText("");
+            tx2.setText("");
+            img.setImageResource(this.getResources().getIdentifier("question_mark", "drawable", getPackageName()));
+        }
         return returnView;
     }
 

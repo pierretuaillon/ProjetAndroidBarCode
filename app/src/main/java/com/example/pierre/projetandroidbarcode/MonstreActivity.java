@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.net.URI;
 
+import static android.icu.lang.UProperty.MATH;
+
 /**
  * Created by natha on 25/10/2017.
  */
@@ -41,8 +43,25 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         Intent source = getIntent();
         Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
         if(source.hasExtra("MonstreID"))
-        mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
+            debloquerMonstre(source.getIntExtra("MonstreID", -1));
+    }
 
+    public void debloquerMonstre(int idMonstre){
+        Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(idMonstre));
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+
+        //On ouvre la base de données pour écrire dedans
+        monstreBDD.open();
+        Monstre monstreAfficcher = monstreBDD.getMonstreWithID(idMonstre);
+        imageView.setImageResource(
+                this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
+        nomMonstreView.setText(monstreAfficcher.getNom());
+        monstreAfficcher.setDebloque(true);
+        monstreAfficcher.setPDA(Math.max(monstreAfficcher.getPDA(),10+getIntent().getIntExtra("PDA",0)));
+        monstreAfficcher.setPDV(Math.max(monstreAfficcher.getPDV(),50+getIntent().getIntExtra("PDV",0)));
+        monstreBDD.selectMonstre(monstreAfficcher.getId());
+        monstreBDD.updateMonstre(monstreAfficcher.getId(), monstreAfficcher);
+        monstreBDD.close();
     }
 
     public void mettreAJourMonstre(int idMonstre){
@@ -56,6 +75,7 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         imageView.setImageResource(
                 this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
         nomMonstreView.setText(monstreAfficcher.getNom());
+        monstreBDD.selectMonstre(monstreAfficcher.getId());
         monstreBDD.close();
     }
     public void mettreAJourArme(int id){

@@ -175,6 +175,13 @@ public class MonstreBDD {
         return bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
     }
 
+    public void selectMonstre(int id){
+        ContentValues values = new ContentValues();
+        values.put(COL_SELECTIONNE, false);
+        bdd.update(TABLE_MONSTRE, values, null, null);
+        values.put(COL_SELECTIONNE, true);
+        bdd.update(TABLE_MONSTRE, values, COL_ID + " = " +id, null);
+    }
     public void selectArme(int id){
         ContentValues values = new ContentValues();
         values.put(COL_SELECTIONNE, false);
