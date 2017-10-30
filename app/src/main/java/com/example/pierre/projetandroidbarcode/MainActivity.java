@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     //Debloque une arme
                 } else if (tabInt[0] >= 20 && tabInt[0] < 60) {
-                    Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                    Intent intentRedirectionScan = new Intent(MainActivity.this, ArmeActivity.class);
                     //Shasos
                     if (tabInt[1] >= 0 && tabInt[1] < 10) {
                         intentRedirectionScan.putExtra("ArmeID", 1);

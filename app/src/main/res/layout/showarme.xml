@@ -23,12 +23,27 @@
         app:srcCompat="@drawable/arme"
         android:layout_below="@id/nomArme"
         />
+
+    <TextView
+        android:id="@+id/NewItem"
+        android:layout_width="match_parent"
+        android:textColor="@color/colorNew"
+        android:layout_height="30dp"
+        android:layout_below="@id/imageViewArme"
+        android:textAlignment="center"
+        android:textIsSelectable="false"
+        android:textSize="18dp"
+        android:text="Vous venez de découvrir : "
+        />
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:orientation="horizontal"
         android:weightSum="2">
+
+
         <ImageView
             android:layout_width="16dp"
             android:layout_height="16dp"
@@ -36,6 +51,7 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/PDA_View"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
@@ -43,11 +59,65 @@
             />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/retourBtn"
+
+    <TextView
+        android:id="@+id/OldItem"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Retour"
+        android:textColor="@color/colorOld"
+        android:layout_height="30dp"
+        android:textAlignment="center"
+        android:textIsSelectable="false"
+        android:textSize="18dp"
+        android:text="Vous aviez déjà : "
         />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/balec"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:srcCompat="@drawable/pda"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/PDA_OldView"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:text="+ 10 PDA"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Sauvegarder"
+            android:layout_weight="1"
+            />
+
+        <Button
+            android:id="@+id/retourBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Retour"
+            android:layout_weight="1"
+            />
+
+        </LinearLayout>
 
 </LinearLayout>

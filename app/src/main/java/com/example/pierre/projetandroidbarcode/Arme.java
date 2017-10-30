@@ -60,4 +60,15 @@ public class Arme {
     public void setLienImage(String lienImage) {
         this.lienImage = lienImage;
     }
+
+    @Override
+    public String toString() {
+        return "Arme{" +
+                "id=" + id +
+                ", debloque=" + debloque +
+                ", attaque=" + attaque +
+                ", nom='" + nom + '\'' +
+                ", lienImage='" + lienImage + '\'' +
+                '}';
+    }
 }

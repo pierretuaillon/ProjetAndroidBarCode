@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class ArmeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView nomArme;
+    TextView nomArme, PDAArme;
     ImageView img;
     Button btnRetour;
 
@@ -24,6 +24,7 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(state);
         setContentView(R.layout.showarme);
         nomArme = (TextView) findViewById(R.id.nomArme);
+        PDAArme = (TextView) findViewById(R.id.PDA_View);
         img = (ImageView) findViewById(R.id.imageViewArme);
         btnRetour = (Button) findViewById(R.id.retourBtn);
         btnRetour.setOnClickListener(this);
@@ -42,12 +43,21 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
 
+
         Arme armeAfficher = monstreBDD.getArmeWithID(idArme);
+        Log.v("ARME : ", armeAfficher.toString());
+
+        Log.v("ARME NOM : ", armeAfficher.getNom());
+        Log.v("ARME ATT : ", Integer.toString(armeAfficher.getAttaque()));
         nomArme.setText(armeAfficher.getNom());
+
+        PDAArme.setText(Integer.toString(PDA));
 
         img.setImageResource(
                 this.getResources().getIdentifier(armeAfficher.getLienImage().toLowerCase(), "drawable", getPackageName())
         );
+
+
         monstreBDD.close();
     }
 
