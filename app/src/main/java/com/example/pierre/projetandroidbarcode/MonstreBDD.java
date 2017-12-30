@@ -127,6 +127,18 @@ public class MonstreBDD {
         return bdd.insert(TABLE_ARME, null, values);
     }
 
+    //Test si au moins un monstre est selectionné
+    public boolean monstresSelectionne(){
+        boolean isSelect = false;
+        ArrayList<Monstre> monstres = getAllMonstres();
+        for ( Monstre monstre: monstres) {
+            if(monstre.isSelectionne()){
+                isSelect = true;
+            }
+        }
+        return isSelect;
+    }
+
     public long insertArmure(Armure armure){
         ContentValues values = new ContentValues();
 
@@ -281,7 +293,7 @@ public class MonstreBDD {
         return armure;
     }
 
-    //Cette méthode permet de convertir un cursor en un livre
+    //Cette méthode permet de convertir un cursor en un monstre
     private Monstre cursorToMonstre(Cursor c){
         //si aucun élément n'a été retourné dans la requête, on renvoie null
         if (c.getCount() == 0)
@@ -307,10 +319,8 @@ public class MonstreBDD {
         }else{
             monstre.setDebloque(true);
         }
-
         //On ferme le cursor
         c.close();
-
         //On retourne le monstre
         return monstre;
     }

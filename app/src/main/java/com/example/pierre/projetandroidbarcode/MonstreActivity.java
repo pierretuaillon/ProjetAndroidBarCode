@@ -39,14 +39,31 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         armuresBtn.setOnClickListener(this);
 
         Intent source = getIntent();
-        Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
-        if(source.hasExtra("MonstreID"))
-        mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
+        Log.v("IDENTIFIANT MONSTRE : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
+        if(source.hasExtra("MonstreID")) {
+            mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
+            //On le selectionne si aucun monstre n'est selectionné
+            MonstreBDD monstreBDD = new MonstreBDD(this);
+            monstreBDD.open();
+            if (!monstreBDD.monstresSelectionne()) {
+                selectionMonstre(source.getIntExtra("MonstreID", -1));
+            }
+            monstreBDD.close();
+        }
+    }
 
+    public void selectionMonstre(int idMonstre){
+        Log.v("Select monstre : ", Integer.toString(idMonstre));
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+        monstreBDD.open();
+        Monstre monstreAUpdate = monstreBDD.getMonstreWithID(idMonstre);
+        monstreAUpdate.setDebloque(true);
+        monstreBDD.updateMonstre(idMonstre, monstreAUpdate);
+        monstreBDD.close();
     }
 
     public void mettreAJourMonstre(int idMonstre){
-        //Création d'une instance de ma classe LivresBDD
+        //Création d'une instance de ma classe MonstreBDD
         Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(idMonstre));
         MonstreBDD monstreBDD = new MonstreBDD(this);
 
