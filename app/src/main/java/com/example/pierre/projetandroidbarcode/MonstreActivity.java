@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import java.net.URI;
 
+import static android.icu.lang.UProperty.MATH;
+
 /**
  * Created by natha on 25/10/2017.
  */
 public class MonstreActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView nomMonstreView;
+    private TextView nomMonstreView, PDVMonstreTextView, PDAMonstreTextView;
     private ImageView armesBtn;
     private ImageView armuresBtn;
     private Button button;
@@ -29,6 +31,8 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(state);
         setContentView(R.layout.showmonstre);
         nomMonstreView = (TextView) findViewById(R.id.nomMonstre);
+        PDVMonstreTextView = (TextView) findViewById(R.id.PDVMonstreText);
+        PDAMonstreTextView = (TextView) findViewById(R.id.PDAMonstreText);
         imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setOnClickListener(this);
         armesBtn = (ImageView) findViewById(R.id.armesBtn);
@@ -42,23 +46,25 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         Log.v("IDENTIFIANT MONSTRE : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
         if(source.hasExtra("MonstreID")) {
             mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
-            //On le selectionne si aucun monstre n'est selectionné
-            MonstreBDD monstreBDD = new MonstreBDD(this);
-            monstreBDD.open();
-            if (!monstreBDD.monstresSelectionne()) {
-                selectionMonstre(source.getIntExtra("MonstreID", -1));
-            }
-            monstreBDD.close();
+            debloquerMonstre(source.getIntExtra("MonstreID", -1));
         }
     }
 
-    public void selectionMonstre(int idMonstre){
-        Log.v("Select monstre : ", Integer.toString(idMonstre));
+    public void debloquerMonstre(int idMonstre){
+        Log.v("IDENTIFIANT MONSTRE2 : ", Integer.toString(idMonstre));
         MonstreBDD monstreBDD = new MonstreBDD(this);
+
+        //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
-        Monstre monstreAUpdate = monstreBDD.getMonstreWithID(idMonstre);
-        monstreAUpdate.setDebloque(true);
-        monstreBDD.updateMonstre(idMonstre, monstreAUpdate);
+        Monstre monstreAfficcher = monstreBDD.getMonstreWithID(idMonstre);
+        imageView.setImageResource(
+                this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
+        nomMonstreView.setText(monstreAfficcher.getNom());
+        monstreAfficcher.setDebloque(true);
+        monstreAfficcher.setPDA(Math.max(monstreAfficcher.getPDA(),10+getIntent().getIntExtra("PDA",0)));
+        monstreAfficcher.setPDV(Math.max(monstreAfficcher.getPDV(),50+getIntent().getIntExtra("PDV",0)));
+        monstreBDD.selectMonstre(monstreAfficcher.getId());
+        monstreBDD.updateMonstre(monstreAfficcher.getId(), monstreAfficcher);
         monstreBDD.close();
     }
 
@@ -73,6 +79,10 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         imageView.setImageResource(
                 this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
         nomMonstreView.setText(monstreAfficcher.getNom());
+        PDVMonstreTextView.setText(monstreAfficcher.getPDV() + " PDV");
+        PDAMonstreTextView.setText(monstreAfficcher.getPDA() + " PDA");
+        monstreBDD.selectMonstre(monstreAfficcher.getId());
+
         monstreBDD.close();
     }
     public void mettreAJourArme(int id){

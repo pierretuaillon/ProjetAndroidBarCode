@@ -39,12 +39,13 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Monstre monstre = getItem(position);
+            Monstre monstre = getItem(position);
+            if(monstre.isDebloque()) {
                 Intent intent = new Intent();
                 intent.putExtra("monstre", monstre.getId());
-                setResult(RESULT_OK,intent);
+                setResult(RESULT_OK, intent);
                 finish();
-
+            }
             }
         });
         Button retour = (Button) findViewById(R.id.btn);
@@ -53,11 +54,8 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
 
     @Override
     public void onClick(View v) {
-        Log.v("bbbbb", "clic id : "+v.getId());
-        Intent intent= new Intent();
-        intent.putExtra("id",(v.getId()));
-        setResult(RESULT_OK,intent);
-        finish();
+        if(v.getId()==R.id.btn)
+            finish();
     }
 
     @Override
@@ -110,12 +108,18 @@ public class MonstresActivity extends AppCompatActivity implements ListAdapter, 
             returnView = convertView;
         Monstre monstre = monstres.get(position);
         TextView tx1 = (TextView) returnView.findViewById(R.id.tx1);
-        tx1.setText(monstre.getNom());
         TextView tx2 = (TextView) returnView.findViewById(R.id.tx2);
-        tx2.setText("PDV:"+monstre.getPDV()+" PDA:"+monstres.get(position).getPDA());
         ImageView img = (ImageView) returnView.findViewById(R.id.img);
-        img.setImageResource(
-                this.getResources().getIdentifier(monstre.getApparence().toLowerCase(), "drawable", getPackageName()));
+        if(monstre.isDebloque()) {
+            tx1.setText(monstre.getNom());
+            tx2.setText("PDV:" + monstre.getPDV() + " PDA:" + monstres.get(position).getPDA());
+            img.setImageResource(this.getResources().getIdentifier(monstre.getApparence().toLowerCase(), "drawable", getPackageName()));
+        }
+        else {
+            tx1.setText("");
+            tx2.setText("");
+            img.setImageResource(this.getResources().getIdentifier("question_mark", "drawable", getPackageName()));
+        }
         return returnView;
     }
 

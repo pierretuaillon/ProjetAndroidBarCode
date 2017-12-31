@@ -34,6 +34,7 @@
         android:weightSum="8">
 
         <ImageView
+
             android:layout_width="16dp"
             android:layout_height="16dp"
             app:srcCompat="@drawable/pdv"
@@ -41,10 +42,11 @@
             />
 
         <TextView
+            android:id="@+id/PDVMonstreText"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:text="10 PDV"
+            android:text=".. PDV"
             />
 
         <ImageView
@@ -54,10 +56,11 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/PDAMonstreText"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:text="10 PDA"
+            android:text=".. PDA"
             />
 
         <ImageView
@@ -115,13 +118,30 @@
 
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/retourBtn"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Retour"
+        android:weightSum="2"
+        android:layout_gravity="bottom"
 
-        />
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Sauvegarder"
+            />
+
+        <Button
+            android:id="@+id/retourBtn"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:text="Retour"
+            />
+
+    </LinearLayout>
+
 
 </LinearLayout>
