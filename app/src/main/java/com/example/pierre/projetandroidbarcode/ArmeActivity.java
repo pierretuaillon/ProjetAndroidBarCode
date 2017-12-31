@@ -17,8 +17,10 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView nomArme, PDAArme;
     ImageView img;
-    Button btnRetour;
+    Button btnRetour, btnSave;
+    Arme armeAfficher;
 
+    int PDAUpdate;
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -27,6 +29,7 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         PDAArme = (TextView) findViewById(R.id.PDA_View);
         img = (ImageView) findViewById(R.id.imageViewArme);
         btnRetour = (Button) findViewById(R.id.retourBtn);
+        btnSave = (Button) findViewById(R.id.saveBtn);
         btnRetour.setOnClickListener(this);
         Intent source = getIntent();
         if(source.hasExtra("ArmeID")){
@@ -37,6 +40,7 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void mettreAJour(int idArme, int PDA){
+        PDAUpdate = PDA;
         Log.v("IDENTIFIANT ARME : ", Integer.toString(idArme));
         MonstreBDD monstreBDD = new MonstreBDD(this);
 
@@ -44,7 +48,7 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
         monstreBDD.open();
 
 
-        Arme armeAfficher = monstreBDD.getArmeWithID(idArme);
+        armeAfficher = monstreBDD.getArmeWithID(idArme);
         Log.v("ARME : ", armeAfficher.toString());
 
         Log.v("ARME NOM : ", armeAfficher.getNom());
@@ -65,6 +69,15 @@ public class ArmeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.retourBtn :
+                finish();
+                break;
+            case R.id.saveBtn :
+                MonstreBDD monstreBDD = new MonstreBDD(this);
+
+                //On ouvre la base de données pour écrire dedans
+                monstreBDD.open();
+                monstreBDD.updateArme(armeAfficher.getId(), PDAUpdate);
+                monstreBDD.close();
                 finish();
                 break;
         }

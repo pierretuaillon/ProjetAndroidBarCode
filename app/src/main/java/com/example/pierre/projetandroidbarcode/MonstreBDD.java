@@ -211,6 +211,12 @@ public class MonstreBDD {
         return cursorToArme(c);
     }
 
+    public int updateArme(int id, int PDA){
+        ContentValues values = new ContentValues();
+        values.put(COL_ATTAQUE_ARME, PDA);
+        return bdd.update(TABLE_ARME, values, COL_ID_ARME + " = " +id, null);
+    }
+
     public ArrayList<Arme> getAllArmes(){
         ArrayList<Arme>  listeArme = new ArrayList<>();
         for (int i=1; i<11; i++){
