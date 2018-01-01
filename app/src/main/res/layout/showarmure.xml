@@ -6,10 +6,10 @@
     android:weightSum="1">
 
     <TextView
-        android:id="@+id/nomArme"
+        android:id="@+id/nomArmure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nom de l'arme"
+        android:text="Nom de l'armure"
         android:textAlignment="center"
         android:textSize="25dp"
         android:textIsSelectable="false"
@@ -17,11 +17,11 @@
         android:height="30dp" />
 
     <ImageView
-        android:id="@+id/imageViewArme"
+        android:id="@+id/imageViewArmure"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:srcCompat="@drawable/arme"
-        android:layout_below="@id/nomArme"
+        app:srcCompat="@drawable/armure"
+        android:layout_below="@id/nomArmure"
         />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:textColor="@color/colorNew"
         android:layout_height="30dp"
-        android:layout_below="@id/imageViewArme"
+        android:layout_below="@id/imageViewArmure"
         android:textAlignment="center"
         android:textIsSelectable="false"
         android:textSize="18dp"
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/PDA_View"
+            android:id="@+id/def_View"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
@@ -87,11 +87,11 @@
             android:layout_weight="1"
             />
         <TextView
-            android:id="@+id/PDA_OldView"
+            android:id="@+id/olddef_View"
             android:layout_width="16dp"
+            android:textColor="@color/colorOld"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:textColor="@color/colorOld"
             android:text="0"
             />
 
@@ -119,6 +119,6 @@
             android:layout_weight="1"
             />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

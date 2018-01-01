@@ -20,11 +20,11 @@ import static android.icu.lang.UProperty.MATH;
  */
 public class MonstreActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView nomMonstreView, PDVMonstreTextView, PDAMonstreTextView;
-    private ImageView armesBtn;
-    private ImageView armuresBtn;
-    private Button button;
+    private TextView nomMonstreView, PDVMonstreTextView, PDAMonstreTextView, armureTextView;
+    private ImageView armesBtn,armuresBtn;
     private ImageView  imageView;
+    private Monstre monstreAfficher;
+    private Arme armeAfficher;
 
     @Override
     public void onCreate(Bundle state) {
@@ -33,6 +33,7 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         nomMonstreView = (TextView) findViewById(R.id.nomMonstre);
         PDVMonstreTextView = (TextView) findViewById(R.id.PDVMonstreText);
         PDAMonstreTextView = (TextView) findViewById(R.id.PDAMonstreText);
+        armureTextView = (TextView) findViewById(R.id.armureText);
         imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setOnClickListener(this);
         armesBtn = (ImageView) findViewById(R.id.armesBtn);
@@ -45,9 +46,14 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         Intent source = getIntent();
         Log.v("IDENTIFIANT MONSTRE : ", Integer.toString(source.getIntExtra("MonstreID", -1)));
         if(source.hasExtra("MonstreID")) {
-            mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
             debloquerMonstre(source.getIntExtra("MonstreID", -1));
+            mettreAJourMonstre(source.getIntExtra("MonstreID", -1));
         }
+        else{
+            afficherMonstre();
+        }
+        afficherArme();
+        afficherArmure();
     }
 
     public void debloquerMonstre(int idMonstre){
@@ -56,15 +62,15 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
 
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
-        Monstre monstreAfficcher = monstreBDD.getMonstreWithID(idMonstre);
+        monstreAfficher = monstreBDD.getMonstreWithID(idMonstre);
         imageView.setImageResource(
-                this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
-        nomMonstreView.setText(monstreAfficcher.getNom());
-        monstreAfficcher.setDebloque(true);
-        monstreAfficcher.setPDA(Math.max(monstreAfficcher.getPDA(),10+getIntent().getIntExtra("PDA",0)));
-        monstreAfficcher.setPDV(Math.max(monstreAfficcher.getPDV(),50+getIntent().getIntExtra("PDV",0)));
-        monstreBDD.selectMonstre(monstreAfficcher.getId());
-        monstreBDD.updateMonstre(monstreAfficcher.getId(), monstreAfficcher);
+                this.getResources().getIdentifier(monstreAfficher.getApparence().toLowerCase(), "drawable", getPackageName()));
+        nomMonstreView.setText(monstreAfficher.getNom());
+        monstreAfficher.setDebloque(true);
+        monstreAfficher.setPDA(Math.max(monstreAfficher.getPDA(),10+getIntent().getIntExtra("PDA",0)));
+        monstreAfficher.setPDV(Math.max(monstreAfficher.getPDV(),50+getIntent().getIntExtra("PDV",0)));
+        monstreBDD.selectMonstre(monstreAfficher.getId());
+        monstreBDD.updateMonstre(monstreAfficher.getId(), monstreAfficher);
         monstreBDD.close();
     }
 
@@ -75,15 +81,27 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
 
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
-        Monstre monstreAfficcher = monstreBDD.getMonstreWithID(idMonstre);
-        imageView.setImageResource(
-                this.getResources().getIdentifier(monstreAfficcher.getApparence().toLowerCase(), "drawable", getPackageName()));
-        nomMonstreView.setText(monstreAfficcher.getNom());
-        PDVMonstreTextView.setText(monstreAfficcher.getPDV() + " PDV");
-        PDAMonstreTextView.setText(monstreAfficcher.getPDA() + " PDA");
-        monstreBDD.selectMonstre(monstreAfficcher.getId());
-
+        monstreAfficher = monstreBDD.getMonstreWithID(idMonstre);
+        monstreBDD.selectMonstre(monstreAfficher.getId());
         monstreBDD.close();
+        afficherMonstre();
+    }
+    public void afficherMonstre(){
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+        monstreBDD.open();
+        monstreAfficher=monstreBDD.getMonstreSelectionne();
+        monstreBDD.close();
+        if(monstreAfficher!=null) {
+            imageView.setImageResource(
+                    this.getResources().getIdentifier(monstreAfficher.getApparence().toLowerCase(), "drawable", getPackageName()));
+            nomMonstreView.setText(monstreAfficher.getNom());
+            PDVMonstreTextView.setText(Integer.toString(monstreAfficher.getPDV()));
+            if(armeAfficher!=null)
+                PDAMonstreTextView.setText(Integer.toString(monstreAfficher.getPDA() + armeAfficher.getAttaque()));
+            else
+                PDAMonstreTextView.setText(Integer.toString(monstreAfficher.getPDA()));
+        }
+
     }
     public void mettreAJourArme(int id){
         //Création d'une instance de ma classe LivresBDD
@@ -93,9 +111,19 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
         monstreBDD.selectArme(id);
-        armesBtn.setImageResource(
-                this.getResources().getIdentifier(monstreBDD.getArmeWithID(id).getLienImage().toLowerCase(), "drawable", getPackageName()));
         monstreBDD.close();
+        afficherArme();
+    }
+    public void afficherArme(){
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+        monstreBDD.open();
+        armeAfficher = monstreBDD.getArmeSelectionne();
+        monstreBDD.close();
+        if(armeAfficher!=null) {
+            PDAMonstreTextView.setText(Integer.toString(armeAfficher.getAttaque() + monstreAfficher.getPDA()));
+            armesBtn.setImageResource(
+                    this.getResources().getIdentifier(armeAfficher.getLienImage().toLowerCase(), "drawable", getPackageName()));
+        }
     }
     public void mettreAJourArmure(int id){
         //Création d'une instance de ma classe LivresBDD
@@ -105,11 +133,21 @@ public class MonstreActivity extends AppCompatActivity implements View.OnClickLi
         //On ouvre la base de données pour écrire dedans
         monstreBDD.open();
         monstreBDD.selectArmure(id);
-        armuresBtn.setImageResource(
-                this.getResources().getIdentifier(monstreBDD.getArmureWithID(id).getLienImage().toLowerCase(), "drawable", getPackageName()));
         monstreBDD.close();
+        afficherArmure();
     }
 
+    public void afficherArmure(){
+        MonstreBDD monstreBDD = new MonstreBDD(this);
+        monstreBDD.open();
+        Armure armure = monstreBDD.getArmureSelectionne();
+        monstreBDD.close();
+        if(armure!=null) {
+            armureTextView.setText(Integer.toString(armure.getDefense()));
+            armuresBtn.setImageResource(
+                    this.getResources().getIdentifier(armure.getLienImage().toLowerCase(), "drawable", getPackageName()));
+        }
+    }
     @Override
     public void onClick(View v) {
         Intent intent;

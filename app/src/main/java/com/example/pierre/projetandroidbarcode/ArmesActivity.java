@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,13 +39,13 @@ public class ArmesActivity extends AppCompatActivity implements ListAdapter, Vie
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Arme arme = getItem(position);
-            if(arme.isDebloque()) {
-                Intent intent = new Intent();
-                intent.putExtra("id", arme.getId());
-                setResult(RESULT_OK, intent);
-                finish();
-            }
+                Arme arme = getItem(position);
+                if(arme.isDebloque()) {
+                    Intent intent = new Intent();
+                    intent.putExtra("id", arme.getId());
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }

@@ -50,6 +50,9 @@ public class MonstreBDD {
     private static final String COL_DEBLOQUE_ARME = "debloque";
     private static final int NUM_COL_DEBLOQUE_ARME = 1;
 
+    private static final String COL_SELECTIONNE_ARME = "selectionne";
+    private static final int NUM_COL_SELECTIONNE_ARME = 5;
+
     private static final String COL_NOM_ARME = "nom";
     private static final int NUM_COL_NOM_ARME = 2;
 
@@ -69,6 +72,9 @@ public class MonstreBDD {
 
     private static final String COL_DEBLOQUE_ARMURE = "debloque";
     private static final int NUM_COL_DEBLOQUE_ARMURE = 1;
+
+    private static final String COL_SELECTIONNE_ARMURE = "selectionne";
+    private static final int NUM_COL_SELECTIONNE_ARMURE = 5;
 
     private static final String COL_NOM_ARMURE = "nom";
     private static final int NUM_COL_NOM_ARMURE = 2;
@@ -123,6 +129,7 @@ public class MonstreBDD {
         values.put(COL_ATTAQUE_ARME, arme.getAttaque());
         values.put(COL_DEBLOQUE_ARME, arme.isDebloque());
         values.put(COL_IMAGE_ARME, arme.getLienImage());
+        values.put(COL_SELECTIONNE_ARME, arme.isSelectionne());
         //on insère l'objet dans la BDD via le ContentValues
         return bdd.insert(TABLE_ARME, null, values);
     }
@@ -146,6 +153,7 @@ public class MonstreBDD {
         values.put(COL_DEFENSE_ARMURE, armure.getDefense());
         values.put(COL_DEBLOQUE_ARMURE, armure.isDebloque());
         values.put(COL_IMAGE_ARMURE, armure.getLienImage());
+        values.put(COL_SELECTIONNE_ARMURE, armure.isSelectionne());
         //on insère l'objet dans la BDD via le ContentValues
         return bdd.insert(TABLE_ARMURE, null, values);
     }
@@ -197,16 +205,16 @@ public class MonstreBDD {
 
     public void selectArme(int id){
         ContentValues values = new ContentValues();
-        values.put(COL_SELECTIONNE, false);
+        values.put(COL_SELECTIONNE_ARME, false);
         bdd.update(TABLE_ARME, values, null, null);
-        values.put(COL_SELECTIONNE, true);
+        values.put(COL_SELECTIONNE_ARME, true);
         bdd.update(TABLE_ARME, values, COL_ID + " = " +id, null);
     }
     public void selectArmure(int id){
         ContentValues values = new ContentValues();
-        values.put(COL_SELECTIONNE, false);
+        values.put(COL_SELECTIONNE_ARMURE, false);
         bdd.update(TABLE_ARMURE, values, null, null);
-        values.put(COL_SELECTIONNE, true);
+        values.put(COL_SELECTIONNE_ARMURE, true);
         bdd.update(TABLE_ARMURE, values, COL_ID + " = " +id, null);
     }
 
@@ -226,15 +234,26 @@ public class MonstreBDD {
         return cursorToMonstre(c);
     }
 
+    public Monstre getMonstreSelectionne(){
+        Cursor c = bdd.query(TABLE_MONSTRE, new String[] {COL_ID, COL_PDV, COL_PDA, COL_NOM, COL_APPARENCE, COL_DEBLOQUE, COL_SELECTIONNE}, COL_SELECTIONNE + " = " + 1, null, null, null, null, "1");
+        return cursorToMonstre(c);
+    }
+
     public Arme getArmeWithID(int id){
-        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_DEBLOQUE_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME}, COL_ID_ARME + " = " + id, null, null, null, null, null);
+        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_DEBLOQUE_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME, COL_SELECTIONNE_ARME}, COL_ID_ARME + " = " + id, null, null, null, null, null);
+        return cursorToArme(c);
+    }
+    public Arme getArmeSelectionne(){
+        Cursor c = bdd.query(TABLE_ARME, new String[]{COL_ID_ARME, COL_DEBLOQUE_ARME, COL_NOM_ARME, COL_ATTAQUE_ARME, COL_IMAGE_ARME, COL_SELECTIONNE_ARME}, COL_SELECTIONNE_ARME + " = " + 1, null, null, null, null, "1");
         return cursorToArme(c);
     }
 
-    public int updateArme(int id, int PDA){
+    public int updateArme(Arme arme){
         ContentValues values = new ContentValues();
-        values.put(COL_ATTAQUE_ARME, PDA);
-        return bdd.update(TABLE_ARME, values, COL_ID_ARME + " = " +id, null);
+        values.put(COL_ATTAQUE_ARME, arme.getAttaque());
+        values.put(COL_DEBLOQUE, arme.isDebloque());
+        values.put(COL_SELECTIONNE, arme.isSelectionne());
+        return bdd.update(TABLE_ARME, values, COL_ID_ARME + " = " +arme.getId(), null);
     }
 
     public ArrayList<Arme> getAllArmes(){
@@ -246,8 +265,20 @@ public class MonstreBDD {
     }
 
     public Armure getArmureWithID(int id){
-        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE, COL_IMAGE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
+        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE, COL_IMAGE_ARMURE, COL_SELECTIONNE_ARMURE}, COL_ID_ARMURE + " = " + id, null, null, null, null, null);
         return cursorToArmure(c);
+    }
+    public Armure getArmureSelectionne(){
+        Cursor c = bdd.query(TABLE_ARMURE, new String[]{COL_ID_ARMURE, COL_DEBLOQUE_ARMURE, COL_NOM_ARMURE, COL_DEFENSE_ARMURE, COL_IMAGE_ARMURE, COL_SELECTIONNE_ARMURE}, COL_SELECTIONNE_ARMURE + " = " + 1, null, null, null, null, "1");
+        return cursorToArmure(c);
+    }
+
+    public int updateArmure(Armure armure){
+        ContentValues values = new ContentValues();
+        values.put(COL_DEFENSE_ARMURE, armure.getDefense());
+        values.put(COL_DEBLOQUE, armure.isDebloque());
+        values.put(COL_SELECTIONNE, armure.isSelectionne());
+        return bdd.update(TABLE_ARMURE, values, COL_ID_ARMURE + " = " +armure.getId(), null);
     }
 
     public ArrayList<Armure> getAllArmures(){
@@ -281,6 +312,11 @@ public class MonstreBDD {
         }else{
             arme.setDebloque(true);
         }
+        if (c.getInt(NUM_COL_SELECTIONNE_ARME) == 0){
+            arme.setSelectionne(false);
+        }else{
+            arme.setSelectionne(true);
+        }
         //On ferme le cursor
         c.close();
         return arme;
@@ -301,6 +337,11 @@ public class MonstreBDD {
             armure.setDebloque(false);
         }else{
             armure.setDebloque(true);
+        }
+        if (c.getInt(NUM_COL_SELECTIONNE_ARMURE) == 0){
+            armure.setSelectionne(false);
+        }else{
+            armure.setSelectionne(true);
         }
         //On ferme le cursor
         c.close();

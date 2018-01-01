@@ -1,12 +1,15 @@
 package com.example.pierre.projetandroidbarcode;
 
+import android.util.Log;
+
 /**
  * Created by natha on 25/10/2017.
  */
 
 public class Arme {
     private int id;
-    private boolean debloque;
+    private boolean debloque=false;
+    private boolean selectionne=false;
     private int attaque;
     private String nom;
     private String lienImage;
@@ -17,7 +20,6 @@ public class Arme {
         this.id=id;
         this.nom=nom;
         this.attaque=atq;
-        this.debloque=false;
         this.lienImage = lien;
     }
 
@@ -33,8 +35,16 @@ public class Arme {
         return debloque;
     }
 
-    public void setDebloque(boolean debloque) {
-        this.debloque = debloque;
+    public void setDebloque(boolean debloqueUpdate) {
+        debloque = debloqueUpdate;
+    }
+
+    public boolean isSelectionne() {
+        return selectionne;
+    }
+
+    public void setSelectionne(boolean selectionne) {
+        this.selectionne = selectionne;
     }
 
     public int getAttaque() {

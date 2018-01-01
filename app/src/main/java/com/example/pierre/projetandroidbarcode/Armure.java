@@ -6,7 +6,8 @@ package com.example.pierre.projetandroidbarcode;
 
 public class Armure {
     private int id;
-    private boolean debloque;
+    private boolean debloque=false;
+    private boolean selectionne=false;
     private String nom;
     private int defense;
     private String lienImage;
@@ -23,7 +24,6 @@ public class Armure {
 
     public Armure (int id, String nom, int defense, String lienImage){
         this.id=id;
-        this.debloque=false;
         this.nom=nom;
         this.defense=defense;
         this.lienImage = lienImage;
@@ -43,6 +43,15 @@ public class Armure {
 
     public void setDebloque(boolean debloque) {
         this.debloque = debloque;
+    }
+
+
+    public boolean isSelectionne() {
+        return selectionne;
+    }
+
+    public void setSelectionne(boolean selectionne) {
+        this.selectionne = selectionne;
     }
 
     public String getNom() {

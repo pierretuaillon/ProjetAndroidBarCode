@@ -25,6 +25,7 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
     private static final String TABLE_ARME = "table_arme";
     private static final String COL_ID_ARME = "id";
     private static final String COL_DEBLOQUE_ARME = "debloque";
+    private static final String COL_SELECTIONNE_ARME = "selectionne";
     private static final String COL_NOM_ARME = "nom";
     private static final String COL_ATTAQUE_ARME = "attaque";
     private static final String COL_IMAGE_ARME = "lienImage";
@@ -33,6 +34,7 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
     private static final String TABLE_ARMURE = "table_armure";
     private static final String COL_ID_ARMURE = "id";
     private static final String COL_DEBLOQUE_ARMURE = "debloque";
+    private static final String COL_SELECTIONNE_ARMURE = "selectionne";
     private static final String COL_NOM_ARMURE = "nom";
     private static final String COL_DEFENSE_ARMURE = "defense";
     private static final String COL_IMAGE_ARMURE = "lienImage";
@@ -52,7 +54,8 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
             + COL_DEBLOQUE_ARME + " BOOLEAN NOT NULL, "
             + COL_NOM_ARME + " TEXT NOT NULL, "
             + COL_ATTAQUE_ARME + " INTEGER NOT NULL, "
-            + COL_IMAGE_ARME + " TEXT NOT NULL "
+            + COL_IMAGE_ARME + " TEXT NOT NULL, "
+            + COL_SELECTIONNE_ARME + " BOOLEAN NOT NULL "
             + ");";
 
     private  static final String CREATE_BDD_ARMURE = "CREATE TABLE " + TABLE_ARMURE + " ("
@@ -60,7 +63,8 @@ public class GenerationBaseDeDonnees extends SQLiteOpenHelper {
             + COL_DEBLOQUE_ARMURE + " BOOLEAN NOT NULL, "
             + COL_NOM_ARMURE + " TEXT NOT NULL, "
             + COL_DEFENSE_ARMURE + " INTEGER NOT NULL, "
-            + COL_IMAGE_ARMURE + " TEXT NOT NULL "
+            + COL_IMAGE_ARMURE + " TEXT NOT NULL, "
+            + COL_SELECTIONNE_ARMURE + " BOOLEAN NOT NULL "
             + ");";
 
     public GenerationBaseDeDonnees(Context context, String name, CursorFactory factory, int version) {

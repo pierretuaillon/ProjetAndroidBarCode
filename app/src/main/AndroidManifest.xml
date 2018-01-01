@@ -16,6 +16,7 @@
         <activity android:name=".ArmesActivity"></activity>
         <activity android:name=".ArmeActivity"></activity>
         <activity android:name=".ArmuresActivity"></activity>
+        <activity android:name=".ArmureActivity"></activity>
         <activity android:name=".MonstreActivity"></activity>
         <activity android:name=".MonstresActivity"></activity>
         <activity android:name=".MainActivity">

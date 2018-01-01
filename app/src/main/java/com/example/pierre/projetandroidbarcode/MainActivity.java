@@ -80,36 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
 
-
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
         }
-
-        if ((ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) &&
-        (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)){
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                    this);
-            // set title
-            alertDialogBuilder.setTitle("");
-            // set dialog message
-            alertDialogBuilder.setMessage("Merci pour votre confiance")
-                    .setCancelable(true);
-            // create alert dialog
-            AlertDialog alertDialog = alertDialogBuilder.create();
-
-            // show it
-            alertDialog.show();
-        }
-
         //Création d'une instance de ma classe LivresBDD
         MonstreBDD monstreBDD = new MonstreBDD(this);
 
@@ -125,18 +99,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(requestCode==22&&resultCode==RESULT_OK){
             if(intent.getStringExtra("scan_format") != null){
                 Log.v("Scan format Main", intent.getStringExtra("scan_format"));
-                txtFormat.setText(intent.getStringExtra("scan_format"));
+                //txtFormat.setText(intent.getStringExtra("scan_format"));
             }
             if (intent.getStringExtra("scan_content") != null) {
                 Log.v("Scan content Main", intent.getStringExtra("scan_content"));
-                txtContent.setText(intent.getStringExtra("scan_content"));
+                //txtContent.setText(intent.getStringExtra("scan_content"));
                 int[] tabInt = new int[4];
                 tabInt = algoTraitement(intent.getStringExtra("scan_content"));
 
-
+                //dragons
                 if (tabInt[0] >= 0 && tabInt[0] < 20) {
                     Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
-                    //Shasos
+                        //Shasos
                     if (tabInt[1] >= 0 && tabInt[1] < 10) {
                         intentRedirectionScan.putExtra("MonstreID", 1);
                         //Brassso
@@ -211,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     //Debloque une armure
                 } else {
-                    Intent intentRedirectionScan = new Intent(MainActivity.this, MonstreActivity.class);
+                    Intent intentRedirectionScan = new Intent(MainActivity.this, ArmureActivity.class);
                     if (tabInt[1] >= 0 && tabInt[1] < 10) {
                         intentRedirectionScan.putExtra("ArmureID", 1);
                     } else if (tabInt[1] >= 10 && tabInt[1] < 20) {
@@ -325,10 +299,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.v("Insertion base armure", "Base déjà remplie");
         }else{
             Armure armure0 = new Armure(1, "Les ailes d'Icare", 10, "armure_ailes");
-            Armure armure1 = new Armure(2, "Le casque à pointe", 10, "armure_casque");
+            Armure armure1 = new Armure(2, "Le casque à pointes", 10, "armure_casque");
             Armure armure2 = new Armure(3, "Le dentier de mamie", 10, "armure_dentier");
             Armure armure3 = new Armure(4, "L'anti faciale", 10, "armure_parapluie");
-            Armure armure4 = new Armure(5, "L'Anneau vagi", 10, "armure_ring");
+            Armure armure4 = new Armure(5, "L'Anneau", 10, "armure_ring");
             Armure armure5 = new Armure(6, "La robe", 10, "armure_robe");
             Armure armure6 = new Armure(7, "La monture", 10, "armure_saddle");
             Armure armure7 = new Armure(8, "Le bouclier du captain", 10, "armure_shield");
@@ -378,52 +352,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_CODE_CAMERA: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-
-                } else {
-
-                }
-                initialisation();
-                return;
-            }
-            case REQUEST_CODE_WRITE_EXTERNAL_STORAGE : {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                            this);
-                    // set title
-                    alertDialogBuilder.setTitle("");
-                    // set dialog message
-                    alertDialogBuilder.setMessage("Merci pour votre confiance")
-                            .setCancelable(true);
-                    // create alert dialog
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-
-                    // show it
-                    alertDialog.show();
-                } else {
-
-                }
-                initialisation();
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        initialisation();
+        return;
     }
 
     public void testerData(){

@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:orientation="horizontal"
-        android:weightSum="8">
+        android:weightSum="6">
 
         <ImageView
 
@@ -46,7 +46,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:text=".. PDV"
+            android:text="0"
             />
 
         <ImageView
@@ -60,7 +60,7 @@
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:text=".. PDA"
+            android:text="0"
             />
 
         <ImageView
@@ -70,22 +70,11 @@
             android:layout_weight="1"
             />
         <TextView
+            android:id="@+id/armureText"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_weight="1"
-            android:text="+ 10 PDA"
-            />
-        <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            app:srcCompat="@drawable/arme"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_weight="1"
-            android:text="+ 10 PDV"
+            android:text="0"
             />
 
     </LinearLayout>
@@ -118,30 +107,15 @@
 
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:weightSum="2"
-        android:layout_gravity="bottom"
-
-        android:layout_height="60dp">
-
-        <Button
-            android:id="@+id/saveBtn"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Sauvegarder"
-            />
 
         <Button
             android:id="@+id/retourBtn"
             android:layout_weight="1"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
             android:layout_height="60dp"
-            android:text="Retour"
+            android:text="Menu"
             />
-
-    </LinearLayout>
 
 
 </LinearLayout>
