@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.bluetooth.BluetoothAdapter;
 
 import java.util.Collection;
 import java.util.Map;
@@ -26,6 +27,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button bScan;
+    Button yaBagarre;
 
     TextView txtFormat, txtContent;
     private final int REQUEST_CODE_CAMERA = 100;
@@ -36,10 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         bScan = (Button) findViewById(R.id.scan_button);
+        yaBagarre = (Button) findViewById(R.id.bagarre);
         Button MonstreBtn = (Button) findViewById(R.id.monstre_button);
         txtFormat = (TextView) findViewById(R.id.scan_format);
         txtContent = (TextView) findViewById(R.id.scan_content);
         bScan.setOnClickListener(this);
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter != null)
+            yaBagarre.setOnClickListener(this);
         MonstreBtn.setOnClickListener(this);
 
         if (ContextCompat.checkSelfPermission(this,
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         genererData();
         // testerData();
     }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         //retrieve scan result
@@ -222,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v.getId()==R.id.monstre_button){
             Intent intent = new Intent(MainActivity.this, MonstreActivity.class);
             startActivityForResult(intent,15);}
+        if(v.getId()==R.id.bagarre){
+            Intent intent = new Intent(MainActivity.this, BagarreActivity.class);
+            startActivityForResult(intent,37);}
     }
 
 

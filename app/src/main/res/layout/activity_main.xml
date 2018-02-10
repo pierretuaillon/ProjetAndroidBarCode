@@ -37,11 +37,11 @@
         android:textSize="20sp"
         />
 
-    <Button android:id="@+id/bagarreLocal"
+    <Button android:id="@+id/bagarre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Bagarre locale"
+        android:text="Chercher la bagarre"
         android:layout_below="@id/monstre_button"
         android:textSize="20sp"
         />
@@ -52,7 +52,7 @@
         android:layout_height="20dp"
         android:textIsSelectable="true"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/bagarreLocal"
+        android:layout_below="@id/bagarre"
      />
 
     <TextView
