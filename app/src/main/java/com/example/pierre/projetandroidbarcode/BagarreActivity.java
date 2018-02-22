@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -70,34 +71,34 @@ public class BagarreActivity extends AppCompatActivity implements View.OnClickLi
         monstreView = (ImageView) findViewById(R.id.monstre);
 
         TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        myUuid = java.util.UUID.fromString(tManager.getDeviceId());
+        try {
+            myUuid = UUID.nameUUIDFromBytes(tManager.getDeviceId().getBytes("utf8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-        ask4Blu();
+        //ask4Blu();
 
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!bluetoothAdapter.isEnabled()) {
             bluetoothAdapter.enable();
         }
+        bluetoothAdapter.startDiscovery();
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(bluetoothReceiver, filter);
         Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
         startActivity(discoverableIntent);
-        search4Dragons();
 
+        Thread server = new AcceptThread();
+        //server.run();
     }
 
     private void ask4Blu () {
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.BLUETOOTH)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.BLUETOOTH},
-                    REQUEST_CODE_ENABLE_BLUETOOTH);
-        }
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBlueTooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBlueTooth, REQUEST_CODE_ENABLE_BLUETOOTH);
@@ -105,29 +106,16 @@ public class BagarreActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private void search4Dragons(){
-        bluetoothAdapter.startDiscovery();
-        int device = 0;
-        ConnectThread client = new ConnectThread(devices.get(device));
-
-        while ( client.mmSocket == null && device<devices.size() ) {
-            device++;
-            client = new ConnectThread(devices.get(device));
-        }
-        if( client.mmSocket != null )
-            client.run();
-        Thread server = new AcceptThread();
-        server.run();
-
-    }
 
     private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+            Log.i("BAGARRE", "recherche de devices bluetooth ...");
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 Toast.makeText(BagarreActivity.this, "New Device = " + device.getName(), Toast.LENGTH_SHORT).show();
-                devices.add(device);
+                Log.i("BAGARRE", "nouveau device bluetooth : "+device.getName());
+                new ConnectThread(device);
             }
         }
     };
@@ -200,6 +188,8 @@ public class BagarreActivity extends AppCompatActivity implements View.OnClickLi
         private BluetoothDevice mmDevice;
 
         public ConnectThread(BluetoothDevice device) {
+
+            Log.i("BAGARRE", "nouveau thread device bluetooth : "+device.getName());
             BluetoothSocket tmp = null;
             mmDevice = device;
             try {

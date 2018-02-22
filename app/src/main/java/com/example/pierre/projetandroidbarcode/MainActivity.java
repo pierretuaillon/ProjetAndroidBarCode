@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView txtFormat, txtContent;
     private final int REQUEST_CODE_CAMERA = 100;
     private final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE= 101;
+    private final static int REQUEST_CODE_ENABLE_BLUETOOTH = 0;
+    private final int REQUEST_CODE_PHONE_STATE = 112;
 
     @Override
     public void onCreate(Bundle state) {
@@ -51,16 +53,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
-
-
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA},
                     REQUEST_CODE_CAMERA);
+        }
 
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_PHONE_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_PHONE_STATE},
+                    REQUEST_CODE_PHONE_STATE);
+        }
 
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.BLUETOOTH)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.BLUETOOTH},
+                    REQUEST_CODE_ENABLE_BLUETOOTH);
         }
 
     }
