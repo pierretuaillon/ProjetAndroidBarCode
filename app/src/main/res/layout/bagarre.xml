@@ -12,7 +12,7 @@
         app:srcCompat="@drawable/question_mark" />
 
     <TextView
-        android:id="@+id/editText4"
+        android:id="@+id/nomJoueur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -24,7 +24,6 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:min="0"
         android:progress="100"
         />
 
@@ -42,7 +41,7 @@
         app:srcCompat="@drawable/question_mark" />
 
     <TextView
-        android:id="@+id/editText"
+        android:id="@+id/nomAdversaire"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
@@ -54,12 +53,11 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:min="0"
         android:progress="100"
         />
 
     <TextView
-        android:id="@+id/editText3"
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"

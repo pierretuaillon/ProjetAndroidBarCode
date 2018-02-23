@@ -66,65 +66,73 @@ public class BagarreActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(state);
         setContentView(R.layout.bagarre);
 
+        this.infoView = (TextView) findViewById(R.id.info);
+        this.nomMonstreJoueur = (TextView) findViewById(R.id.nomJoueur);
+        this.nomMonstreAdversaire = (TextView) findViewById(R.id.nomAdversaire);
+        this.barPVJoueur = (ProgressBar) findViewById(R.id.progressBar);
+        this.barPVadversaire = (ProgressBar) findViewById(R.id.progressBar2);
         this.attaqueBTN = (Button) findViewById(R.id.buttonBagarre);
         this.attaqueBTN.setOnClickListener(this);
 
         if(!alreadyInstance()) {
-            //On change le max des progressbar
-            this.barPVJoueur.setMax(monstreJoueur.getPDV());
-            this.barPVadversaire.setMax(monstreAFaireCombattre.getPDV());
-
             //Création d'une instance de ma classe LivresBDD
             MonstreBDD monstreBDD = new MonstreBDD(this);
 
             monstreBDD.open();
 
             this.monstreJoueur = monstreBDD.getMonstreSelectionne();
-            if(monstreBDD.getArmeSelectionne() != null){
-                this.armeJoueur = monstreBDD.getArmeSelectionne();
-            }else{
-                this.armeJoueur = null;
+            //On change le max des progressbar
+            if (monstreJoueur == null)
+                finish();
+            else {
+                this.barPVJoueur.setMax(monstreJoueur.getPDV());
+                this.barPVadversaire.setMax(monstreAFaireCombattre.getPDV());
+
+                if (monstreBDD.getArmeSelectionne() != null) {
+                    this.armeJoueur = monstreBDD.getArmeSelectionne();
+                } else {
+                    this.armeJoueur = null;
+                }
+
+                if (monstreBDD.getArmureSelectionne() != null) {
+                    this.armureJoueur = monstreBDD.getArmureSelectionne();
+                } else {
+                    this.armureJoueur = null;
+                }
+
+
+                this.nomMonstreJoueur.setText(monstreJoueur.getNom());
+                this.nomMonstreAdversaire.setText(monstreAFaireCombattre.getNom());
+
+
+                //On récupére tous les monstres pour en faire combattre un au hasard
+                ArrayList<Monstre> monstres = monstreBDD.getAllMonstres();
+
+                //On récupére toutes les armures pour en equiper une aléatoire
+                ArrayList<Armure> armures = monstreBDD.getAllArmures();
+                //idem pour les armes
+                ArrayList<Armure> armes = monstreBDD.getAllArmures();
+
+
+                Random rand = new Random();
+                //Renvoie un nombre en 0 et le nombre de monstres
+                int indexMonstre = rand.nextInt(monstres.size());
+
+                this.monstreAFaireCombattre = monstreBDD.getMonstreWithID(indexMonstre);
+                //On modifie ces points de vies en random
+                this.monstreAFaireCombattre.setPDV(rand.nextInt(50));
+                //idem pour les pda
+                this.monstreAFaireCombattre.setPDA(rand.nextInt(50));
+
+
+                int indexArmure = rand.nextInt(armures.size());
+                this.armureMonstreAFaireCombattre = monstreBDD.getArmureWithID(indexArmure);
+                this.armureMonstreAFaireCombattre.setDefense(rand.nextInt(50));
+
+                int indexArme = rand.nextInt(armes.size());
+                this.armeMonstreAFaireCombattre = monstreBDD.getArmeWithID(indexArme);
+                this.armeMonstreAFaireCombattre.setAttaque(rand.nextInt(50));
             }
-
-            if (monstreBDD.getArmureSelectionne() != null){
-                this.armureJoueur = monstreBDD.getArmureSelectionne();
-            }else{
-                this.armureJoueur = null;
-            }
-
-
-
-            this.nomMonstreJoueur.setText(monstreJoueur.getNom());
-            this.nomMonstreAdversaire.setText(monstreAFaireCombattre.getNom());
-
-
-            //On récupére tous les monstres pour en faire combattre un au hasard
-            ArrayList<Monstre> monstres = monstreBDD.getAllMonstres();
-
-            //On récupére toutes les armures pour en equiper une aléatoire
-            ArrayList<Armure> armures = monstreBDD.getAllArmures();
-            //idem pour les armes
-            ArrayList<Armure> armes = monstreBDD.getAllArmures();
-
-
-            Random rand = new Random();
-            //Renvoie un nombre en 0 et le nombre de monstres
-            int indexMonstre = rand.nextInt(monstres.size());
-
-            this.monstreAFaireCombattre = monstreBDD.getMonstreWithID(indexMonstre);
-            //On modifie ces points de vies en random
-            this.monstreAFaireCombattre.setPDV(rand.nextInt(50));
-            //idem pour les pda
-            this.monstreAFaireCombattre.setPDA(rand.nextInt(50));
-
-
-            int indexArmure = rand.nextInt(armures.size());
-            this.armureMonstreAFaireCombattre = monstreBDD.getArmureWithID(indexArmure);
-            this.armureMonstreAFaireCombattre.setDefense(rand.nextInt(50));
-
-            int indexArme = rand.nextInt(armes.size());
-            this.armeMonstreAFaireCombattre = monstreBDD.getArmeWithID(indexArme);
-            this.armeMonstreAFaireCombattre.setAttaque(rand.nextInt(50));
         }
     }
 
